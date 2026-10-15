@@ -1,0 +1,910 @@
+{
+  "info": {
+    "_postman_id": "ca8dde81-8169-4a75-ba95-466ea9c6c74b",
+    "name": "CDA ITG All",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "50502510",
+    "_collection_link": "https://go.postman.co/collection/50502510-ca8dde81-8169-4a75-ba95-466ea9c6c74b?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "DEV:CDA Endpoint Access Token",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "var json = JSON.parse(responseBody);\r",
+              "pm.globals.set(\"tokenExchangeBearerToken\", json.access_token);\r",
+              "//utils.printJwt(json.access_token);"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "password",
+              "value": "Y2RhOmtlMHBlMWM1LTBzNTktMThzNi1pczNwLTJ4bDR5bXhmejQzYg==",
+              "type": "string"
+            },
+            {
+              "key": "username",
+              "value": "cda",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://api-int-dev.support.hpecorp.net/uaa/oauth/token?grant_type=client_credentials",
+          "protocol": "https",
+          "host": [
+            "api-int-dev",
+            "support",
+            "hpecorp",
+            "net"
+          ],
+          "path": [
+            "uaa",
+            "oauth",
+            "token"
+          ],
+          "query": [
+            {
+              "key": "grant_type",
+              "value": "client_credentials"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Support Level",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{tokenExchangeBearerToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://api-int-dev.its.hpecorp.net/apigw/chat/v1alpha1/assets/SGH940V44S/P06479-291/support-levels",
+          "protocol": "https",
+          "host": [
+            "api-int-dev",
+            "its",
+            "hpecorp",
+            "net"
+          ],
+          "path": [
+            "apigw",
+            "chat",
+            "v1alpha1",
+            "assets",
+            "SGH940V44S",
+            "P06479-291",
+            "support-levels"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Firmware",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{tokenExchangeBearerToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://api-int-itg.its.hpecorp.net/apigw/chat/v1alpha1/assets/CNG243TDY0/641016-B21/firmware?countryCode=US",
+          "protocol": "https",
+          "host": [
+            "api-int-itg",
+            "its",
+            "hpecorp",
+            "net"
+          ],
+          "path": [
+            "apigw",
+            "chat",
+            "v1alpha1",
+            "assets",
+            "CNG243TDY0",
+            "641016-B21",
+            "firmware"
+          ],
+          "query": [
+            {
+              "key": "countryCode",
+              "value": "US"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Casecallback",
+      "protocolProfileBehavior": {
+        "disabledSystemHeaders": {}
+      },
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{tokenExchangeBearerToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "X-Auth-Token",
+            "value": "050d64c2-987f-40a9-9ef7-679835295e6b",
+            "type": "text"
+          },
+          {
+            "key": "X-Communication-Id",
+            "value": "d95e9614-c69c-4ea3-b6a9-76d5c61ace59",
+            "type": "text"
+          },
+          {
+            "key": "x-tracking-id",
+            "value": "l724a096-f407-11ea-adc1-0242ac120002",
+            "type": "text"
+          },
+          {
+            "key": "callersource",
+            "value": "testing",
+            "type": "text",
+            "disabled": true
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"comments\": [\r\n    \"testing from Epitome\",\r\n    \"2nd string\",\r\n      \"3rd string\",\r\n        \"4th string\",\r\n          \"5th string\"\r\n\r\n  ]\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://api-int-itg.its.hpecorp.net/apigw/chat/v1alpha1/cases/5332633134/activity",
+          "protocol": "https",
+          "host": [
+            "api-int-itg",
+            "its",
+            "hpecorp",
+            "net"
+          ],
+          "path": [
+            "apigw",
+            "chat",
+            "v1alpha1",
+            "cases",
+            "5332633134",
+            "activity"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "CaseStatus Update",
+      "protocolProfileBehavior": {
+        "disabledSystemHeaders": {}
+      },
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{tokenExchangeBearerToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "X-Auth-Token",
+            "value": "050d64c2-987f-40a9-9ef7-679835295e6b",
+            "type": "text"
+          },
+          {
+            "key": "X-Communication-Id",
+            "value": "d95e9614-c69c-4ea3-b6a9-76d5c61ace59",
+            "type": "text"
+          },
+          {
+            "key": "x-tracking-id",
+            "value": "UkGN889-f497-11ea-adc1-0242vc120002",
+            "type": "text"
+          },
+          {
+            "key": "ClientName",
+            "value": "cda",
+            "type": "text",
+            "disabled": true
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"subject\": \"HPE DL360 Gen10 8SFF NC CTO Svr Hard Disk Issue\",\r\n  \"detailedStatus\": \"CSR Create Part Order Issue\",\r\n  \"issue\": \"Hard Disk Failure\",\r\n  \"outage\": false,\r\n  \"newInstall\": false,\r\n  \"status\": \"Pending\",\r\n  \"gsdEnvironment\": \"VA TS\",\r\n  \"npsStatus\": \"Passed\",\r\n  \"street\": \"A street name\",\r\n  \"city\": \"A city name\",\r\n  \"electronicCountry\": \"A country name\",\r\n  \"zipPostalCode\": \"11297\"\r\n}\r\n\r\n// {\r\n//     \"Id\": \"500D600000DjkhkIAB\",\r\n//     \"Status\": \"Pending\",\r\n//     \"Detailed_Status__c\": \"CSR Create Part Order Issue\",\r\n//     \"GSD_Environment__c\":\"VA TS\",\r\n//     \"Subject\": \"HPE DL360 Gen10 8SFF NC CTO Svr Hard Disk Issue Parts Order\",\r\n//     \"Issue__c\":\"Hard Disk Issue\",\r\n//     \"Outage__c\":\"No\",\r\n//     \"New_Install__c\":\"No\"\r\n// }",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://api-int-itg.its.hpecorp.net/apigw/chat/v1alpha1/cases/5332381139",
+          "protocol": "https",
+          "host": [
+            "api-int-itg",
+            "its",
+            "hpecorp",
+            "net"
+          ],
+          "path": [
+            "apigw",
+            "chat",
+            "v1alpha1",
+            "cases",
+            "5332381139"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Troubleshoot",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true,
+        "disabledSystemHeaders": {}
+      },
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{tokenExchangeBearerToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-Auth-Token",
+            "value": "050d64c2-987f-40a9-9ef7-679835295e6b",
+            "type": "text"
+          },
+          {
+            "key": "X-Communication-Id",
+            "value": "d95e9614-c69c-4ea3-b6a9-76d5c61ace59",
+            "type": "text"
+          },
+          {
+            "key": "x-tracking-id",
+            "value": "Z39zpBpbAImXKTOQmnbzQwAAAAQ",
+            "type": "text"
+          },
+          {
+            "key": "callersource",
+            "value": "testing",
+            "type": "text",
+            "disabled": true
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://api-int-itg.its.hpecorp.net/apigw/chat/v1alpha1/assets/703932-421/classifyIssue?issueDescription=hdd",
+          "protocol": "https",
+          "host": [
+            "api-int-itg",
+            "its",
+            "hpecorp",
+            "net"
+          ],
+          "path": [
+            "apigw",
+            "chat",
+            "v1alpha1",
+            "assets",
+            "703932-421",
+            "classifyIssue"
+          ],
+          "query": [
+            {
+              "key": "issueDescription",
+              "value": "hdd"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Createcase",
+      "protocolProfileBehavior": {
+        "disabledSystemHeaders": {}
+      },
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{tokenExchangeBearerToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "X-Auth-Token",
+            "value": "050d64c2-987f-40a9-9ef7-679835295e6b",
+            "type": "text"
+          },
+          {
+            "key": "X-Communication-Id",
+            "value": "d95e9614-c69c-4ea3-b6a9-76d5c61ace59",
+            "type": "text"
+          },
+          {
+            "key": "x-tracking-id",
+            "value": "I854a096-f407-11ea-adc1-0242ac120002",
+            "type": "text"
+          },
+          {
+            "key": "callersource",
+            "value": "testing",
+            "type": "text",
+            "disabled": true
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"severity\": \"3-Normal\",\r\n  \"caseType\": \"HPE DL360 Gen10 8SFF NC CTO Svr Hard Disk Issue\",\r\n  \"productDescription\": \"HDD\",\r\n  \"productNumber\": \"P19766-B21\",\r\n  \"productSerialNumber\": \"CN2734567\",\r\n  \"contractId\": \"106125298655\",\r\n  \"customerCountryCode\": \"US\",\r\n  \"language\": \"en\",\r\n  \"wesQueue\": \"GSD CSC Chat\",\r\n  \"issue\": \"HDD issue\",\r\n  \"origin\": \"hpesc\",\r\n  \"env\": \"GSD ENV\",\r\n  \"contact\": {\r\n    \"cId\": \"7832489379483\",\r\n    \"lastName\": \"Smyth\",\r\n    \"firstName\": \"John\",\r\n    \"contactPhone\": \"+43798739434\",\r\n    \"contactEmail\": \"John@gmail.com\"\r\n  },\r\n  \"site\": {\r\n    \"siteId\": \"S123\",\r\n    \"siteCompanyName\": \"CVS Caremark Corporation\",\r\n    \"siteAddressLine1\": \"1 CVS DR\",\r\n    \"siteAddressLine2\": \"1 CVS DR\",\r\n    \"siteCity\": \"WOONSOCKET\",\r\n    \"siteState\": \"RI\",\r\n    \"siteZip\": \"02895-6146\",\r\n    \"siteCountry\": \"US\"\r\n  }\r\n}\r\n ",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://api-int-itg.its.hpecorp.net/apigw/chat/v1alpha1/cases/",
+          "protocol": "https",
+          "host": [
+            "api-int-itg",
+            "its",
+            "hpecorp",
+            "net"
+          ],
+          "path": [
+            "apigw",
+            "chat",
+            "v1alpha1",
+            "cases",
+            ""
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "CaseInsertTask",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{tokenExchangeBearerToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "ClientName",
+            "value": "DCE_RND_ITG",
+            "type": "text",
+            "disabled": true
+          },
+          {
+            "key": "x-tracking-id",
+            "value": "89b3dd85-9af5-4df9-a556-c172dd816d77",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"description\": \"Task transcript\",\r\n  \"subject\": \"DSE Virtual Agent Transcript-v1.3 train demo \"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://api-int-itg.its.hpecorp.net/apigw/chat/v1alpha1/cases/5332633134/tasks",
+          "protocol": "https",
+          "host": [
+            "api-int-itg",
+            "its",
+            "hpecorp",
+            "net"
+          ],
+          "path": [
+            "apigw",
+            "chat",
+            "v1alpha1",
+            "cases",
+            "5332633134",
+            "tasks"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "/parts- get part order details",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{tokenExchangeBearerToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "\r\n{\r\n  \"originalRequestedSparePart\": \"872737-001\",\r\n  \"sparePartNumber\": \"872737-001\",\r\n  \"sparePartDescription\": \"SPS-DRV HDD 1.2TB 12G 10K SFF SAS DS SC\",\r\n  \"rohsCode\": \"COMPLY_2912\",\r\n  \"csrCode\": \"A\",\r\n  \"estimatedArrivalTime\": \"2025-09-24T16:33:00Z\",\r\n  \"partResponseCode\": \"SUCCESS\",\r\n  \"shipFromPlantCode\": \"C299\",\r\n  \"addressType\": \"USERENTRY\",\r\n  \"customerAddress\": {\r\n    \"companyName\": \"TD Synnex Corporation\",\r\n    \"firstName\": \"Team\",\r\n    \"lastName\": \"Chakra\",\r\n    \"street1\": \"44201 Nobel Dr\",\r\n    \"street2\": \"\",\r\n    \"city\": \"CA\",\r\n    \"state\": \"Fremont\",\r\n    \"country\": \"US\",\r\n    \"countryCode\": \"US\",\r\n    \"postalCode\": \"94538-3178\",\r\n    \"contactPhoneNo\": \"35391754772\",\r\n    \"email\": \"va_jarvis@groups.ext.hpe.com\"\r\n  },\r\n  \"requestedPartQuantity\": 1,\r\n  \"deliveryPriorityCode\": 615,\r\n  \"customerRequestedDatetime\": \"2025-09-24T16:33:00Z\",\r\n  \"deliveryNotes\": \"None\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://api-gw-ext-itg.support.hpe.com/apigwext/chat/v1alpha1/cases/5400258188/parts",
+          "protocol": "https",
+          "host": [
+            "api-gw-ext-itg",
+            "support",
+            "hpe",
+            "com"
+          ],
+          "path": [
+            "apigwext",
+            "chat",
+            "v1alpha1",
+            "cases",
+            "5400258188",
+            "parts"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "getSpareParts",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{tokenExchangeBearerToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": []
+        },
+        "url": {
+          "raw": "https://api-int-itg.its.hpecorp.net/apigw/chat/v1alpha1/assets/CZ29210D49/868704-B21/spares?commodity=HDD&defectivePartSerialNumber=49M0A0XTFF1F",
+          "protocol": "https",
+          "host": [
+            "api-int-itg",
+            "its",
+            "hpecorp",
+            "net"
+          ],
+          "path": [
+            "apigw",
+            "chat",
+            "v1alpha1",
+            "assets",
+            "CZ29210D49",
+            "868704-B21",
+            "spares"
+          ],
+          "query": [
+            {
+              "key": "commodity",
+              "value": "HDD"
+            },
+            {
+              "key": "defectivePartSerialNumber",
+              "value": "49M0A0XTFF1F"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "spare-part-availability",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{tokenExchangeBearerToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Content-Length",
+            "value": "<calculated when request is sent>\n",
+            "type": "text",
+            "disabled": true
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "// {\r\n//   \"entitlementType\": \"SBD\",\r\n//   \"salesOrgCode\": \"US00\",\r\n//   \"deliveryRequestedTimeStamp\": \"2025-05-16T17:00:00Z\",\r\n//   \"companyName\": \"Some Company Name\",\r\n//   \"street1\": \"A street name\",\r\n//   \"street2\": \"Another street name\",\r\n//   \"countryCode\": \"IN\",\r\n//   \"postalCode\": \"622411\",\r\n//   \"cityName\": \"Pune\",\r\n//   \"state\": \"Maharashtra\"\r\n// }\r\n{\r\n  \"entitlementType\": \"SBD\",\r\n  \"salesOrgCode\": \"US00\",\r\n  \"deliveryRequestedTimeStamp\": \"2025-08-30T00:00:00Z\",\r\n  \"companyName\": \"TD SYNNEX Corporatio\",\r\n  \"street1\": \"44201 Nobel Dr\",\r\n  \"street2\": \" \",\r\n  \"countryCode\": \"US\",\r\n  \"postalCode\": \"94538-3178\",\r\n  \"cityName\": \"Fremont\",\r\n  \"state\": \"CA\",\r\n  \"countryGeographyIdentifier\": \"UU\",\r\n  \"languageCode\": \"en\"\r\n}"
+        },
+        "url": {
+          "raw": "https://api-int-itg.its.hpecorp.net/apigw/chat/v1alpha1/assets/CZ214205C6/869119-B21/spares/872737-001",
+          "protocol": "https",
+          "host": [
+            "api-int-itg",
+            "its",
+            "hpecorp",
+            "net"
+          ],
+          "path": [
+            "apigw",
+            "chat",
+            "v1alpha1",
+            "assets",
+            "CZ214205C6",
+            "869119-B21",
+            "spares",
+            "872737-001"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "getLocations",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{tokenExchangeBearerToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "authsource",
+            "value": "IAM",
+            "type": "text"
+          },
+          {
+            "key": "x-gss-updates-1",
+            "value": "WyJnc3MuZHdmLnVzZXJEYXRhIiwiZ3NzLmR3Zi5yZXNvbHZlZExvY2FsZSIsImdzcy5kd2YuZmVhdHVyZUZsYWdzIiwiZ3NzLmR3Zi5waW5uZWQucmVzZXQuZm9yd2FyZGVkIl0=;WyJjb20uaHAuZHdmLnV0aWwudXNlci5SZWdpc3RlcmVkVXNlciIsImphdmEudXRpbC5Mb2NhbGUiLCJqYXZhLnV0aWwuSGFzaFNldCIsImphdmEudXRpbC5EYXRlIl0=;W3siZW1haWwiOiJjaGF0X2hwZXNjX2xleF91c2VyQHRlc3RocGUuY29tIiwidXNlcklEIjoiY2hhdF9ocGVzY19sZXhfdXNlckB0ZXN0aHBlLmNvbSIsInByb2ZpbGVJRCI6IjAwdTI3dnd4M3E1aTBsN2VIMGg4Iiwic3ViamVjdElEIjoiMDB1Mjd2d3gzcTVpMGw3ZUgwaDgiLCJmaXJzdE5hbWUiOiJNaWtlIiwibGFzdE5hbWUiOiJCb3QiLCJwaG9uZSI6IiszODE2NTQ1ODc5NjEiLCJwaG9uZUV4dCI6IiIsIm1vYmlsZVBob25lIjoiKzM4MTY1NDU4Nzk2MSIsInJlZ2lzdGVyZWRMYW5ndWFnZSI6ImVuIiwicmVzaWRlbnRDb3VudHJ5IjoiVVMiLCJidXNpbmVzc05hbWUiOiJIUEUgIFMiLCJidXNpbmVzc1N0cmVldCI6IjEwMCBIaWdoIFMgMTAwIEhpZ2ggUyIsImJ1c2luZXNzQ2l0eSI6IkNhcnNvbiIsImJ1c2luZXNzU3RhdGUiOiJDQSIsImJ1c2luZXNzUG9zdGFsQ29kZSI6IjkwNzQ1IiwiYnVzaW5lc3NDb3VudHJ5IjoiVVMiLCJwYXJ0bmVySWRlbnRpZmllciI6IiIsImVtYWlsVmVyaWZpZWQiOnRydWUsInNjcmVlbmluZ1N0YXR1cyI6ImFwcHJvdmVkIiwidGl0bGUiOiIiLCJpZGxlVGltZW91dCI6NzIwMCwidGltZXpvbmUiOnsiaWQiOiJBbWVyaWNhL05ld19Zb3JrIn0sImdlbmVyYXRlZFRpbWV6b25lIjp7ImlkIjoiQW1lcmljYS9Mb3NfQW5nZWxlcyJ9LCJyZXNvbHZlZExvY2FsZSI6ImVuX1VTIiwibG9naW5EYXRlIjoiMjAyNS0wOS0wM1QxMDoyNToyNy4wMDBaIiwibGFzdExvZ2luRGF0ZSI6IjE5NzAtMDEtMDFUMDA6MDA6MDAuMDAwWiIsImxhc3RNb2RpZnlEYXRlIjoiMjAyNS0wOC0yOFQwOTowOTo1OC4wMDBaIiwiY3JlYXRpb25EYXRlIjoiMTk3MC0wMS0wMVQwMDowMDowMC4wMDBaIiwiYXV0aFR5cGUiOiJIUFAiLCJhdXRoU291cmNlIjoiSUFNIiwiYWNjb3VudFR5cGUiOiJFWFQiLCJhdXRob3JpdHkiOiJJQU0iLCJjb21wYW55VHlwZSI6IkhQRSIsInJhd0RhdGEiOnsiWmlwIjoiOTA3NDUiLCJQcm9maWxlSWQiOiIwMHUyN3Z3eDNxNWkwbDdlSDBoOCIsImJ1c1N0YXRlIjoiQ0EiLCJFbWFpbCI6ImNoYXRfaHBlc2NfbGV4X3VzZXJAdGVzdGhwZS5jb20iLCJocGVHVFNFbWJhcmdvU3RhdHVzIjoiQVBQUk9WRUQiLCJycGxfc2NyZWVuaW5nU3RhdHVzIjoiYXBwcm92ZWQiLCJvaWRjX2FjY2Vzc190b2tlbiI6ImV5SnJhV1FpT2lKVE1uUmxVMlJpTFdoWlZVSmZPRmhRU25wbmRVdFBPRGhCU0RoZmJqY3RUMEpoVGsxeVZqVlBZVFZqSWl3aVlXeG5Jam9pVWxNeU5UWWlmUS5leUoyWlhJaU9qRXNJbXAwYVNJNklrRlVMbVJTYkhObVNGRXRMVEE0ZUU5SFZIcEZYMFJqWjNFeGJtdGlhRWQ1VURkRVZucHRiREJpVlVONlJsRXViMkZ5TTJoME4zTnljM3B0YTFOaFJXRXdhRGNpTENKcGMzTWlPaUpvZEhSd2N6b3ZMMkYxZEdndGFYUm5MbWh3WlM1amIyMHZiMkYxZEdneUwyRjFjM1J3ZW5GaWNqRXdVemhLZDNCYU1HZzNJaXdpWVhWa0lqb2lZWFYwYUMxcGRHY3VhSEJsTG1OdmJTSXNJbWxoZENJNk1UYzFOamc1TlRFeU9Td2laWGh3SWpveE56VTJPVEExT1RJNUxDSmphV1FpT2lJd2IyRXhNek42Wlc5cWQwdFBSMmQwTVRCb09DSXNJblZwWkNJNklqQXdkVEkzZG5kNE0zRTFhVEJzTjJWSU1HZzRJaXdpYzJOd0lqcGJJbVZ0WVdsc0lpd2liMlptYkdsdVpWOWhZMk5sYzNNaUxDSnZjR1Z1YVdRaUxDSjBaV3hsY0dodmJtVWlMQ0p3Y205bWFXeGxJbDBzSW1GMWRHaGZkR2x0WlNJNk1UYzFOamc1TlRFeU55d2lhSEJsWDJod2NIQnliMlpwYkdWcFpDSTZJakF3ZFRJM2RuZDRNM0UxYVRCc04yVklNR2c0SWl3aWMzVmlJam9pWTJoaGRGOW9jR1Z6WTE5c1pYaGZkWE5sY2tCMFpYTjBhSEJsTG1OdmJTSXNJbWx6VG05dVJHVm1ZWFZzZEVGMWRHaFRaWEoyWlhJaU9pSjBjblZsSWl3aWFIQmxYM1YxYVdRaU9pSXdNSFV5TjNaM2VETnhOV2t3YkRkbFNEQm9PQ0lzSWtkeWIzVndjeUk2V3lKd1lYTnpjRzl5ZEMxelkybHRMV0Z3Y0d4cFkyRjBhVzl1TFdGemMybG5ibTFsYm5RaUxDSkZkbVZ5ZVc5dVpTSXNJa2RVVXlCVFEwbE5JRUZ3Y0d4cFkyRjBhVzl1SUVGemMybG5ibTFsYm5RZ1IzSnZkWEFpTENKcFlXMHRiV1JqY0MxelkybHRMVzlyZEdFdGRYTmxjbk1pTENKTlJFTlFJRk5EU1UwZ1lYTnphV2R1YldWdWRDSXNJa2hRUlNCRmJYQnNiM2xsWlhNaUxDSnBZVzB0ZFhObGNuTXRkMmwwYUc5MWRDMXRabUV0Wlc1aFlteGxaQ0pkTENKMFpXNWhiblJKWkNJNkltaDFZaUo5LmJjb3d4SUZoZ0lnemhCVlkwYS11Tks3aTRhZ2x6d052VXlpUFJkWUNxWTRraVNDWTNGQ0JnSmFkMkt4bFJoN19uWDRTSzVkeTJreWRKV1ExLVJBNF82Z1NFcmFONEx3OWN2ZFc3RlpyTVM5ZHp6b2pwdFFieWo2bTR1WkJEc3lfemlycDBCZ01UTWQtZGlSTGlTRTVPclpwbE5ia2t5YU9ZRXhoc1FSVFdGS09keEg4VDZfbGxZM01qcUVqZ2VzMUFmclIyUUNQOWlRVTBsSlJvZFdlTzRTdnNiQ3Y4UTExa3QyWnk2bEdrS3RvM3d0aXNhNE9aLTVJNjA2WnZBTlQtbF9BOGJFTnVFQjBfMXNXX2h4NHNIN1ZfN3p5em84a19aUXVXWWg3VHlUQUlPRHp1cU51dEJPaC1JXzZEUXpZbmtTS3dTNUF0RjBTbU9UREdpbXIwZyIsIkVtYWlsQ29udGFjdFByZWYiOiJZIiwiYnVzVGVsTnVtYmVyIjoiKzM4MTY1NDU4Nzk2MSIsIlN0cmVldCI6IjEwMCBIaWdoIFMiLCJIUEUgRW1wbG95ZWVzIjoiSFBQIiwiQnVzQ291bnRyeUNvZGUiOiJVUyIsIlBBUlRORVIiOiJOIiwic2JzRG93bnN0cmVhbVNlcnZpY2VzRmVlZGJhY2siOltdLCJTUEZBdXRoVHlwZSI6IkhQUCIsInNic191c2VyX3R5cGUiOiJzYnNfZXh0ZXJuYWwiLCJvaWRjX2FjY2Vzc190b2tlbl9leHBpcmVzIjoiMTc1NjkwNTkzMC",
+            "type": "text"
+          },
+          {
+            "key": "x-gss-updates-2",
+            "value": "IsImhwZUdUU1JQTFN0YXR1cyI6IkFQUFJPVkVEIiwicGFydG5lcl9zYnNfY2FsbF9zdGF0dXNfZmIiOiJQQVJOVEVSX0RBVEFfUkVRVUVTVEVEX05PTkVfRk9VTkQiLCJnaXZlbk5hbWUiOiJNaWtlIiwiYnVzQ29tcGFueU5hbWUiOiJIUEUgIFMiLCJCdXNUaW1lem9uZUNvZGUiOiJBbWVyaWNhL05ld19Zb3JrIiwiaHBlR1RTRW1iYXJnb1RpbWVzdGFtcCI6IjIwMjUtMDgtMjhUMDk6MTA6MDMiLCJDaXR5IjoiQ2Fyc29uIiwic3ViamVjdElEIjoiMDB1Mjd2d3gzcTVpMGw3ZUgwaDgiLCJjb250YWN0UHJlZkVtYWlsIjoiWSIsIm1vYmlsZVBob25lIjoiKzM4MTY1NDU4Nzk2MSIsImJ1c0NpdHkiOiJDYXJzb24iLCJNRENQIFNDSU0gYXNzaWdubWVudCI6IkhQUCIsImhwcF91c2VyTmFtZSI6ImNoYXRfaHBlc2NfbGV4X3VzZXJAdGVzdGhwZS5jb20iLCJSZXNpZGVudENvdW50cnlDb2RlIjoiVVMiLCJTdGF0ZSI6IkNBIiwib2lkY19pZF90b2tlbiI6ImV5SnJhV1FpT2lKVE1uUmxVMlJpTFdoWlZVSmZPRmhRU25wbmRVdFBPRGhCU0RoZmJqY3RUMEpoVGsxeVZqVlBZVFZqSWl3aVlXeG5Jam9pVWxNeU5UWWlmUS5leUp6ZFdJaU9pSXdNSFV5TjNaM2VETnhOV2t3YkRkbFNEQm9PQ0lzSW01aGJXVWlPaUpOYVd0bElFSnZkQ0lzSW1WdFlXbHNJam9pWTJoaGRGOW9jR1Z6WTE5c1pYaGZkWE5sY2tCMFpYTjBhSEJsTG1OdmJTSXNJblpsY2lJNk1Td2lhWE56SWpvaWFIUjBjSE02THk5aGRYUm9MV2wwWnk1b2NHVXVZMjl0TDI5aGRYUm9NaTloZFhOMGNIcHhZbkl4TUZNNFNuZHdXakJvTnlJc0ltRjFaQ0k2SWpCdllURXpNM3BsYjJwM1MwOUhaM1F4TUdnNElpd2lhV0YwSWpveE56VTJPRGsxTVRJNUxDSmxlSEFpT2pFM05UWTRPVGczTWprc0ltcDBhU0k2SWtsRUxubDFabEJSTW5OdlVGbERkak5hT0RkMGNubDFMWGxsVURaTWJGbDFUekUxWWxSNU9FRlZRWGxXY1VVaUxDSmhiWElpT2xzaWNIZGtJbDBzSW1sa2NDSTZJakF3YjI1d2JuTjNkVEJhUVdORlpIbDNNR2czSWl3aWJtOXVZMlVpT2lKdWQxOVZWa2xWWVhNMGJFNURNRmhLY0ROU01taEtkVEY0U2pSSlUzcFNRbGRUWTE5Q09IZFdkamhGSWl3aWNISmxabVZ5Y21Wa1gzVnpaWEp1WVcxbElqb2lZMmhoZEY5b2NHVnpZMTlzWlhoZmRYTmxja0IwWlhOMGFIQmxMbU52YlNJc0ltZHBkbVZ1WDI1aGJXVWlPaUpOYVd0bElpd2labUZ0YVd4NVgyNWhiV1VpT2lKQ2IzUWlMQ0o2YjI1bGFXNW1ieUk2SWtGdFpYSnBZMkV2VG1WM1gxbHZjbXNpTENKaGRYUm9YM1JwYldVaU9qRTNOVFk0T1RVeE1qY3NJbUYwWDJoaGMyZ2lPaUpaVDBRNVZXeFlOelZmYlUxbFltRTRTVGRvV1dsM0lpd2lhWE5PYjI1RVpXWmhkV3gwUVhWMGFGTmxjblpsY2lJNkluUnlkV1VpTENKb2NHVmZkWFZwWkNJNklqQXdkVEkzZG5kNE0zRTFhVEJzTjJWSU1HZzRJaXdpWXlJNklsVlRJaXdpYUhCbFgyMXZZbWxzWlZCb2IyNWxJam9pS3pNNE1UWTFORFU0TnprMk1TSXNJbU51SWpvaVRXbHJaU0JDYjNRaUxDSm9jR1ZmZEdsdFpYcHZibVVpT2lKQmJXVnlhV05oTDA1bGQxOVpiM0pySWl3aVUzVmlhbVZqZENJNkltTm9ZWFJmYUhCbGMyTmZiR1Y0WDNWelpYSkFkR1Z6ZEdod1pTNWpiMjBpTENKb2NHVmZhSEJ3Y0hKdlptbHNaV2xrSWpvaU1EQjFNamQyZDNnemNUVnBNR3czWlVnd2FEZ2lMQ0pvY0dWZmNISnBiV0Z5ZVZCb2IyNWxJam9pS3pNNE1UWTFORFU0TnprMk1TSXNJblZwWkNJNkltTm9ZWFJmYUhCbGMyTmZiR1Y0WDNWelpYSkFkR1Z6ZEdod1pTNWpiMjBpTENKb2NHVmZZMjl0Y0dGdWVWOXVZVzFsSWpvaVNGQkZJQ0JUSWl3aWFIQmxYMk52YlhCaGJubE9ZVzFsSWpvaVNGQkZJQ0JUSWl3aWFIQmxYMnh2WTJGc1pTSTZJbVZ1WDFWVElpd2lhSEJsWDNCeVpXWmxjbkpsWkV4aGJtZDFZV2RsSWpvaVpXNGlMQ0pvY0dWZlkyOTFiblJ5ZVY5amIyUmxJam9pVlZNaWZRLjFaaTRFWVNtekpSTHh5c0hEbWZNRW1TVmxlODE5djdULXJLQUo5OExXTTRKVXZiR1laVS15NzR3Y1c4TC1qTTRPa3BMS2NTanByX2QtRjdCY2FFd0RTcFM0UGhPbWRnV19kTkZaS1E5T1ptZHQ1aTBtY0kwOXVqOFdtT2I5R3ZhMFJib2k2Ukhrc1hPNUZ2eVdXeHl1V1NXcEVLRVJvT0lIWnJCY2phX0hxMjhBRExIUFREaE5lNEpZQXB4V0JPV3h4b3l4Y1gtX2JYWHJNeXRQZndOaElwQXc0d0JGQS03ZUtLSlN5em9uUnZmb2NPMUtJRkIwZEFvOS0zb2tTajA1M1BmZzFGVHduckRzWUdIdFdTeG1lSUJpODBjRUFRMkZQM3RrU0xHOU5BcXJiYWVUc2w4RXJiaU1BM2xrRkIzczlRMk9sZWtucEdwTG5xbDRiWnRnQSIsIkxhc3ROYW1lIjoiQm90IiwiYnVzVGltZXpvbmVDb2RlIjoiQW1lcmljYS9OZXdfWW9yayIsImJ1c1Bvc3RhbENvZGUiOiI5MDc0NSIsImhwZU1mYU9wdEluIjoiZmFsc2UiLCJocGVDb250YWN0UHJlZmVyZW5jZUVtYWlsVXBkYXRlZERhdGUiOiIyMDI0LTEwLTEwIiwib2lkY19jbGFpbV9leHAiOiIxNzU2ODk4NzI5IiwiVXNlckdyb3VwcyI6WyJTUDRUU19QT1JUQUxfRkVBVFVSRV9DVVNUT01FUl9VU0VSUyIsIlNQNFRTX1BPUlRBTF9GRUFUVVJFX0ZMT1dDTV9VU0VSUyIsInBhc3Nwb3J0LXNjaW0tYXBwbGljYXRpb24tYXNzaWdubWVudCIsIkdUUyBTQ0lNIEFwcGxpY2F0aW9uIEFzc2lnbm1lbnQgR3JvdXAiLCJpYW0tbWRjcC1zY2ltLW9rdGEtdXNlcnMiLCJNRENQIFNDSU0gYXNzaWdubWVudCIsIkhQRSBFbXBsb3llZXMiLCJpYW0tdXNlcnMtd2l0aG91dC1tZmEtZW5hYmxlZCJdLCJyZXNpZGVudENvdW50cnlDb2RlIjoiVVMiLCJocHBQcm9maWxlSWQiOiIwMHUyN3Z3eDNxNWkwbDdlSDBoOCIsIkdUUyBTQ0lNIEFwcGxpY2F0aW9uIEFzc2lnbm1lbnQgR3JvdXAiOiJIUFAiLCJpYW0tbWRjcC1zY2ltLW9rdGEtdXNlcnMiOiJIUFAiLCJsYW5nQ29kZSI6ImVuIiwidGVybXNDb25kaXRpb25zUHJpdmFjeSI6InRydWUiLCJzYnNfYWN0b3JfdHlwZSI6IkhQUEVNQUlMIiwiaWFtLXVzZXJzLXdpdGhvdXQtbWZhLWVuYWJsZWQiOiJIUFAiLCJwYXNzcG9ydC1zY2ltLWFwcGxpY2F0aW9uLWFzc2lnbm",
+            "type": "text"
+          },
+          {
+            "key": "x-gss-updates-3",
+            "value": "1lbnQiOiJIUFAiLCJocGVHVFNVbmlxdWVJRCI6IjRmZjRhNjFkLTk0MzQtNDJmNS1iNzA0LTE3M2U1MGNkZWNhMSIsImhwcFVzZXJJZCI6ImNoYXRfaHBlc2NfbGV4X3VzZXJAdGVzdGhwZS5jb20iLCJMYW5ndWFnZSI6ImVuIiwiaHBlR1RTUlBMVGltZXN0YW1wIjoiMjAyNS0wOC0yOFQwOToxMDowMyIsImhwcF9wcm9maWxlSWQiOiIwMHUyN3Z3eDNxNWkwbDdlSDBoOCIsInNuIjoiQm90Iiwic2JzX2FjdG9yX2lkIjoiY2hhdF9ocGVzY19sZXhfdXNlckB0ZXN0aHBlLmNvbSIsIm9pZGNfY2xhaW1fc3ViIjoiMDB1Mjd2d3gzcTVpMGw3ZUgwaDgiLCJlbWFpbCI6ImNoYXRfaHBlc2NfbGV4X3VzZXJAdGVzdGhwZS5jb20iLCJCdXNDb21wYW55TmFtZSI6IkhQRSAgUyIsIkZpcnN0TmFtZSI6Ik1pa2UiLCJCdXNBZGRyZXNzTGluZTIiOiIxMDAgSGlnaCBTIiwiYnVzQ291bnRyeUNvZGUiOiJVUyIsIlVzZXJJZCI6ImNoYXRfaHBlc2NfbGV4X3VzZXJAdGVzdGhwZS5jb20iLCJidXNBZGRyZXNzTGluZTIiOiIxMDAgSGlnaCBTIiwiUGhvbmVOdW1iZXIiOiIrMzgxNjU0NTg3OTYxIiwiYnVzQWRkcmVzc0xpbmUxIjoiMTAwIEhpZ2ggUyIsInNic191c2VyaWRlbnRpZmllciI6IjAwdTI3dnd4M3E1aTBsN2VIMGg4IiwiTW9iaWxlVGVsZXBob25lTnVtYmVyIjoiKzM4MTY1NDU4Nzk2MSJ9LCJncm91cHMiOlsiU1A0VFNfUE9SVEFMX0ZFQVRVUkVfQ1VTVE9NRVJfVVNFUlMiLCJTUDRUU19QT1JUQUxfRkVBVFVSRV9GTE9XQ01fVVNFUlMiLCJMT0NBTF9QT1JUQUxfSFBQX1VTRVJTIiwiTE9DQUxfUE9SVEFMX0VYVF9VU0VSUyIsIkdUUyBTQ0lNIEFwcGxpY2F0aW9uIEFzc2lnbm1lbnQgR3JvdXAiLCJMT0NBTF9QT1JUQUxfQ09VTlRSWV9VUyIsImlhbS1tZGNwLXNjaW0tb2t0YS11c2VycyIsIkxPQ0FMX1BPUlRBTF9SRUdJU1RFUkVEX1VTRVJTIiwiaWFtLXVzZXJzLXdpdGhvdXQtbWZhLWVuYWJsZWQiLCJMT0NBTF9QT1JUQUxfQ09NUEFOWV9IUEUiLCJMT0NBTF9QT1JUQUxfTEFOR1VBR0VfRU4iLCJMT0NBTF9QT1JUQUxfSUFNX1VTRVJTIiwicGFzc3BvcnQtc2NpbS1hcHBsaWNhdGlvbi1hc3NpZ25tZW50IiwiTURDUCBTQ0lNIGFzc2lnbm1lbnQiLCJIUEUgRW1wbG95ZWVzIl19LCJlbl9VUyIsWyJrbV9kb2NfcHJvY2Vzc2VkX3Byb2R1Y3RfaGllcmFyY2h5IiwiY2VwMl9hdXRoZW50aWNhdGVkIiwiY2VwMl9wcm9wYWdhdGUiLCJyZWRpcmVjdF9zaXRlU3VwcG9ydF90b193ZWJTaXRlSGVscFJlcXVlc3QiLCJpYW1fcHJlcGFyZSIsIlNMSU1IRiIsInBhcnRzT3JkZXJfc2VydmljZV9sZXZlbC5jb21wbGV0ZWNhcmUiLCJjZXAyX3VzZXIiLCJrbV9zd19hZGRpdGlvbmFsX3Jlc291cmNlc19lbmFibGVkIiwic2EyX3VpX2VuYWJsZV90b2tlbl9jbGllbnRfY2FjaGluZyIsImRpc2Nsb3N1cmVfbGV2ZWxfc3dkX3BhZ2UiLCJjaGF0Ym90X2xleF9wYXJ0b3JkZXJfdXNlciIsImNoYXRib3RfbGV4X2NhbmFyeV91c2VyIiwiY2VwMl9lbGlnaWJsZSIsImttX3N3X2d0Y2Fhc19lbmFibGVkIiwia21fc3dfc2JvbU5ld0Zsb3dfZW5hYmxlZCIsInN3ZF9jb2xsZWN0aW9uX3BhZ2VfaWNtIiwicmVkaXJlY3RfbGl2ZWNoYXRfdG9fVkEiLCJEQ1MubW90ZCIsImttX2RvY19icm9rZW5fbGlua3NfcmVwb3J0IiwiU0EyIiwia21faW5kZXhlcnNfdXNlX3NldGhfcXVlcmllcyIsInVuc3VwcG9ydGVkX2xhbmd1YWdlc19mb3JfV2Vic2l0ZV9IZWxwX1JlcXVlc3QiLCJrbV9zd19zYm9tX2VuYWJsZWQiLCJrbV9kb2NfcHJlcHVibGlzaF9jaGVja3MiLCJpYW1fZWxpZ2libGUiLCJjZXAyX2hlYWRlciIsIkRDUyIsImttX3N3X25ld19zZWNhcGlfZW5hYmxlZCIsImttX3N3X2Jyb2FkY29tX25ld19hdXRoZW50aWNhdGlvbl9lbmFibGVkIiwia21fdW5zdXBwb3J0ZWRfY29udGVudCIsImNlcDJfZWxpZ2libGVfcmVndWxhciIsImttX3N3X2ZlZWRiYWNrX2VuYWJsZWQiLCJpYW1fdXNlciIsIkRIRldTIl0sIjIwMjUtMDktMDNUMTA6MjQ6NTUuNzY4WiJd",
+            "type": "text"
+          },
+          {
+            "key": "x-gss-updates-sig",
+            "value": "OgFYs31xbD1P6kzMQO2qc24J0vOaMbEy+dtwfBNQ0239chpazdpYrQTXDWWpMtjq359LWyucKbNmUmnu4P0d5t8xh7f5M2dv7K4o4GEnARiOWZ+aadEQzvVd1+ZKJ4JvnLNLgbjYJz9KSkSkeesHIzN4Gksa8XrZfhyHZpWqm2HuH1xqp37z9qTjp747hq0SffWM12Ljl/CpWO74ddizvoG8Nsw2smb5B+UMnPq+s3lK/hmHZxtC+OhKjroAXyddb6FVK6xRyLKBdaMS/vwNQ48freWmJtCzqbyorsNR2AqDbGyNREkRpw9ygNktvgT9Cir4VS+EDWV9DaqAl0zhPA==",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "https://api-int-itg.its.hpecorp.net/apigw/chat/v1alpha1/assets/CZ29210D49/868704-B21/locations",
+          "protocol": "https",
+          "host": [
+            "api-int-itg",
+            "its",
+            "hpecorp",
+            "net"
+          ],
+          "path": [
+            "apigw",
+            "chat",
+            "v1alpha1",
+            "assets",
+            "CZ29210D49",
+            "868704-B21",
+            "locations"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "/cases- get case details api",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{tokenExchangeBearerToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "x-gss-updates-1",
+            "value": "WyJnc3MuZHdmLnVzZXJEYXRhIiwiZ3NzLmR3Zi5yZXNvbHZlZExvY2FsZSIsImdzcy5kd2YuZmVhdHVyZUZsYWdzIl0=;WyJjb20uaHAuZHdmLnV0aWwudXNlci5SZWdpc3RlcmVkVXNlciIsImphdmEudXRpbC5Mb2NhbGUiLCJqYXZhLnV0aWwuSGFzaFNldCJd;W3siZW1haWwiOiJjaGF0X2hwZXNjX2xleF91c2VyQHRlc3RocGUuY29tIiwidXNlcklEIjoiY2hhdF9ocGVzY19sZXhfdXNlckB0ZXN0aHBlLmNvbSIsInByb2ZpbGVJRCI6IjAwdTI3dnd4M3E1aTBsN2VIMGg4Iiwic3ViamVjdElEIjoiMDB1Mjd2d3gzcTVpMGw3ZUgwaDgiLCJmaXJzdE5hbWUiOiJNaWtlIiwibGFzdE5hbWUiOiJCb3QiLCJwaG9uZSI6IiszODE2NTQ1ODc5NjEiLCJwaG9uZUV4dCI6IiIsIm1vYmlsZVBob25lIjoiKzM4MTY1NDU4Nzk2MSIsInJlZ2lzdGVyZWRMYW5ndWFnZSI6ImVuIiwicmVzaWRlbnRDb3VudHJ5IjoiVVMiLCJidXNpbmVzc05hbWUiOiJIUEUgIFMiLCJidXNpbmVzc1N0cmVldCI6IjEwMCBIaWdoIFMgMTAwIEhpZ2ggUyIsImJ1c2luZXNzQ2l0eSI6IkNhcnNvbiIsImJ1c2luZXNzU3RhdGUiOiJDQSIsImJ1c2luZXNzUG9zdGFsQ29kZSI6IjkwNzQ1IiwiYnVzaW5lc3NDb3VudHJ5IjoiVVMiLCJwYXJ0bmVySWRlbnRpZmllciI6IiIsImVtYWlsVmVyaWZpZWQiOnRydWUsInNjcmVlbmluZ1N0YXR1cyI6ImFwcHJvdmVkIiwidGl0bGUiOiIiLCJpZGxlVGltZW91dCI6NzIwMCwidGltZXpvbmUiOnsiaWQiOiJBbWVyaWNhL05ld19Zb3JrIn0sImdlbmVyYXRlZFRpbWV6b25lIjp7ImlkIjoiQXNpYS9Lb2xrYXRhIn0sInJlc29sdmVkTG9jYWxlIjoiZW5fSU4iLCJsb2dpbkRhdGUiOiIyMDI1LTA5LTI1VDEwOjUwOjQ4LjAwMFoiLCJsYXN0TG9naW5EYXRlIjoiMTk3MC0wMS0wMVQwMDowMDowMC4wMDBaIiwibGFzdE1vZGlmeURhdGUiOiIyMDI1LTA5LTEwVDExOjM2OjM0LjAwMFoiLCJjcmVhdGlvbkRhdGUiOiIxOTcwLTAxLTAxVDAwOjAwOjAwLjAwMFoiLCJhdXRoVHlwZSI6IkhQUCIsImF1dGhTb3VyY2UiOiJJQU0iLCJhY2NvdW50VHlwZSI6IkVYVCIsImF1dGhvcml0eSI6IklBTSIsImNvbXBhbnlUeXBlIjoiSFBFIiwicmF3RGF0YSI6eyJaaXAiOiI5MDc0NSIsIlByb2ZpbGVJZCI6IjAwdTI3dnd4M3E1aTBsN2VIMGg4IiwiYnVzU3RhdGUiOiJDQSIsIkVtYWlsIjoiY2hhdF9ocGVzY19sZXhfdXNlckB0ZXN0aHBlLmNvbSIsImhwZUdUU0VtYmFyZ29TdGF0dXMiOiJBUFBST1ZFRCIsInJwbF9zY3JlZW5pbmdTdGF0dXMiOiJhcHByb3ZlZCIsIm9pZGNfYWNjZXNzX3Rva2VuIjoiZXlKcmFXUWlPaUpUTW5SbFUyUmlMV2haVlVKZk9GaFFTbnBuZFV0UE9EaEJTRGhmYmpjdFQwSmhUazF5VmpWUFlUVmpJaXdpWVd4bklqb2lVbE15TlRZaWZRLmV5SjJaWElpT2pFc0ltcDBhU0k2SWtGVUxuaDRWSEp5Y1ZndE5tWlRXRlZ2VjFsdlRFVmliRWx0U21ZMWFrcFRRMVZLYzNWWk1HeHplQzAwY0hNdWIyRnlNMm8zY0hWaGRHZFdhM2xuYkU4d2FEY2lMQ0pwYzNNaU9pSm9kSFJ3Y3pvdkwyRjFkR2d0YVhSbkxtaHdaUzVqYjIwdmIyRjFkR2d5TDJGMWMzUndlbkZpY2pFd1V6aEtkM0JhTUdnM0lpd2lZWFZrSWpvaVlYVjBhQzFwZEdjdWFIQmxMbU52YlNJc0ltbGhkQ0k2TVRjMU9EYzVOelExTWl3aVpYaHdJam94TnpVNE9EQTRNalV5TENKamFXUWlPaUl3YjJFeE16TjZaVzlxZDB0UFIyZDBNVEJvT0NJc0luVnBaQ0k2SWpBd2RUSTNkbmQ0TTNFMWFUQnNOMlZJTUdnNElpd2ljMk53SWpwYkltOXdaVzVwWkNJc0ltOW1abXhwYm1WZllXTmpaWE56SWl3aWNISnZabWxzWlNJc0luUmxiR1Z3YUc5dVpTSXNJbVZ0WVdsc0lsMHNJbUYxZEdoZmRHbHRaU0k2TVRjMU9EYzVOelEwT0N3aWFIQmxYMmh3Y0hCeWIyWnBiR1ZwWkNJNklqQXdkVEkzZG5kNE0zRTFhVEJzTjJWSU1HZzRJaXdpYzNWaUlqb2lZMmhoZEY5b2NHVnpZMTlzWlhoZmRYTmxja0IwWlhOMGFIQmxMbU52YlNJc0ltbHpUbTl1UkdWbVlYVnNkRUYxZEdoVFpYSjJaWElpT2lKMGNuVmxJaXdpYUhCbFgzVjFhV1FpT2lJd01IVXlOM1ozZUROeE5Xa3diRGRsU0RCb09DSXNJa2R5YjNWd2N5STZXeUp3WVhOemNHOXlkQzF6WTJsdExXRndjR3hwWTJGMGFXOXVMV0Z6YzJsbmJtMWxiblFpTENKRmRtVnllVzl1WlNJc0lrZFVVeUJUUTBsTklFRndjR3hwWTJGMGFXOXVJRUZ6YzJsbmJtMWxiblFnUjNKdmRYQWlMQ0pwWVcwdGJXUmpjQzF6WTJsdExXOXJkR0V0ZFhObGNuTWlMQ0pOUkVOUUlGTkRTVTBnWVhOemFXZHViV1Z1ZENJc0lraFFSU0JGYlhCc2IzbGxaWE1pTENKcFlXMHRkWE5sY25NdGQybDBhRzkxZEMxdFptRXRaVzVoWW14bFpDSmRMQ0owWlc1aGJuUkpaQ0k2SW1oMVlpSjkuTU81cjFuUXpEcEsycUg1OFk0V3R2RXFfOHZJVVF0X19mVi15eVJXYndVNmt0dkxKNXdLa0kyaUJ6RE5LMlljM3Zfem5ZVnVhUzlFRFJoZkVKOU9UTzhra19OQlZtaW9CQVVSOGQxWlRnQ2Fjc2lJa2phTG53YTUwTUNkY2dubWM4U1BMQ01mZm1feENTQkM4TUR6X2Zvazh5NlZ3MUZxQXZRSmNmYi0xRU1OLVpGUUVVVWhJMVpodEw3dVU0X3FhSnpvbTZzVDJxR05xVFRVRmVHNHhFWkZuWEtVVElRQldzSDdBZ05YeGlOTE5GejYtTENRcU1Pc2FUZEJwcmYyQUg2UW1WdUcxYVJfQVBYLXpVQmM3eWU3RGVPWEpwZEtmUjJ1RlJyX0NEYnQyMGYySjFKOTlVMFZCQlhSLTFrLTdWWVlIODdHV1l3UjAzQTRja09nQ253IiwiRW1haWxDb250YWN0UHJlZiI6IlkiLCJidXNUZWxOdW1iZXIiOiIrMzgxNjU0NTg3OTYxIiwiU3RyZWV0IjoiMTAwIEhpZ2ggUyIsIkhQRSBFbXBsb3llZXMiOiJIUFAiLCJCdXNDb3VudHJ5Q29kZSI6IlVTIiwiUEFSVE5FUiI6Ik4iLCJzYnNEb3duc3RyZWFtU2VydmljZXNGZWVkYmFjayI6W10sIlNQRkF1dGhUeXBlIjoiSFBQIiwic2JzX3VzZXJfdHlwZSI6InNic19leHRlcm5hbCIsIm9pZGNfYWNjZXNzX3Rva2VuX2V4cGlyZXMiOiIxNzU4ODA4MjUyIiwiaHBlR1RTUlBMU3RhdHVzIjoiQVBQUk9WRUQiLCJwYXJ0bmVyX3Nic19jYWxsX3N0YXR1c19mYi",
+            "type": "text"
+          },
+          {
+            "key": "x-gss-updates-2",
+            "value": "I6IlBBUk5URVJfREFUQV9SRVFVRVNURURfTk9ORV9GT1VORCIsImdpdmVuTmFtZSI6Ik1pa2UiLCJidXNDb21wYW55TmFtZSI6IkhQRSAgUyIsIkJ1c1RpbWV6b25lQ29kZSI6IkFtZXJpY2EvTmV3X1lvcmsiLCJocGVHVFNFbWJhcmdvVGltZXN0YW1wIjoiMjAyNS0wOS0wNVQxMjo1NDozMyIsIkNpdHkiOiJDYXJzb24iLCJzdWJqZWN0SUQiOiIwMHUyN3Z3eDNxNWkwbDdlSDBoOCIsImNvbnRhY3RQcmVmRW1haWwiOiJZIiwibW9iaWxlUGhvbmUiOiIrMzgxNjU0NTg3OTYxIiwiYnVzQ2l0eSI6IkNhcnNvbiIsIk1EQ1AgU0NJTSBhc3NpZ25tZW50IjoiSFBQIiwiaHBwX3VzZXJOYW1lIjoiY2hhdF9ocGVzY19sZXhfdXNlckB0ZXN0aHBlLmNvbSIsIlJlc2lkZW50Q291bnRyeUNvZGUiOiJVUyIsIlN0YXRlIjoiQ0EiLCJvaWRjX2lkX3Rva2VuIjoiZXlKcmFXUWlPaUpUTW5SbFUyUmlMV2haVlVKZk9GaFFTbnBuZFV0UE9EaEJTRGhmYmpjdFQwSmhUazF5VmpWUFlUVmpJaXdpWVd4bklqb2lVbE15TlRZaWZRLmV5SnpkV0lpT2lJd01IVXlOM1ozZUROeE5Xa3diRGRsU0RCb09DSXNJbTVoYldVaU9pSk5hV3RsSUVKdmRDSXNJbVZ0WVdsc0lqb2lZMmhoZEY5b2NHVnpZMTlzWlhoZmRYTmxja0IwWlhOMGFIQmxMbU52YlNJc0luWmxjaUk2TVN3aWFYTnpJam9pYUhSMGNITTZMeTloZFhSb0xXbDBaeTVvY0dVdVkyOXRMMjloZFhSb01pOWhkWE4wY0hweFluSXhNRk00U25kd1dqQm9OeUlzSW1GMVpDSTZJakJ2WVRFek0zcGxiMnAzUzA5SFozUXhNR2c0SWl3aWFXRjBJam94TnpVNE56azNORFV5TENKbGVIQWlPakUzTlRnNE1ERXdOVElzSW1wMGFTSTZJa2xFTGxsTmEyTlVSVTFqUTFWNlFTMUJYMFZvT0VsV1IwUTBkbFowV2tKRVZuRk1VMUZqZGxkV1pVdElhbU1pTENKaGJYSWlPbHNpY0hka0lsMHNJbWxrY0NJNklqQXdiMjV3Ym5OM2RUQmFRV05GWkhsM01HZzNJaXdpYm05dVkyVWlPaUp6VUVkVGJreHZWVVpqYmxsSVdIVjFNV3BoY1VOT1gxazFNbWh1UlhSb2RWSm1ZeTF0TXpRek9GbHJJaXdpY0hKbFptVnljbVZrWDNWelpYSnVZVzFsSWpvaVkyaGhkRjlvY0dWelkxOXNaWGhmZFhObGNrQjBaWE4wYUhCbExtTnZiU0lzSW1kcGRtVnVYMjVoYldVaU9pSk5hV3RsSWl3aVptRnRhV3g1WDI1aGJXVWlPaUpDYjNRaUxDSjZiMjVsYVc1bWJ5STZJa0Z0WlhKcFkyRXZUbVYzWDFsdmNtc2lMQ0poZFhSb1gzUnBiV1VpT2pFM05UZzNPVGMwTkRnc0ltRjBYMmhoYzJnaU9pSTViMUZsZVdsUFUyVnhTMWhwVDBkVmQzaHNlVFZuSWl3aWFYTk9iMjVFWldaaGRXeDBRWFYwYUZObGNuWmxjaUk2SW5SeWRXVWlMQ0pvY0dWZmRYVnBaQ0k2SWpBd2RUSTNkbmQ0TTNFMWFUQnNOMlZJTUdnNElpd2lZeUk2SWxWVElpd2lhSEJsWDIxdlltbHNaVkJvYjI1bElqb2lLek00TVRZMU5EVTROemsyTVNJc0ltTnVJam9pVFdsclpTQkNiM1FpTENKb2NHVmZkR2x0WlhwdmJtVWlPaUpCYldWeWFXTmhMMDVsZDE5WmIzSnJJaXdpVTNWaWFtVmpkQ0k2SW1Ob1lYUmZhSEJsYzJOZmJHVjRYM1Z6WlhKQWRHVnpkR2h3WlM1amIyMGlMQ0pvY0dWZmFIQndjSEp2Wm1sc1pXbGtJam9pTURCMU1qZDJkM2d6Y1RWcE1HdzNaVWd3YURnaUxDSm9jR1ZmY0hKcGJXRnllVkJvYjI1bElqb2lLek00TVRZMU5EVTROemsyTVNJc0luVnBaQ0k2SW1Ob1lYUmZhSEJsYzJOZmJHVjRYM1Z6WlhKQWRHVnpkR2h3WlM1amIyMGlMQ0pvY0dWZlkyOXRjR0Z1ZVY5dVlXMWxJam9pU0ZCRklDQlRJaXdpYUhCbFgyTnZiWEJoYm5sT1lXMWxJam9pU0ZCRklDQlRJaXdpYUhCbFgyeHZZMkZzWlNJNkltVnVYMVZUSWl3aWFIQmxYM0J5WldabGNuSmxaRXhoYm1kMVlXZGxJam9pWlc0aUxDSm9jR1ZmWTI5MWJuUnllVjlqYjJSbElqb2lWVk1pZlEuTGY1MFRqbkNacGlva0dMR2R0OXZlOG52OUg4dGVtVF9YSFFoSGlSZFdtdjVKUXFLX2V3cWNlLXBTaHBDNHYyZk13clBjR2VOUGlSWlM3dkg5SEhKZVFuNXNwcU84eWhLYjZ1bkRqWFdUWVhTVERIVEtIX09kSE1uaVFUanBzZU9xLV90NGc2YkZxMVhhUnRXRXdzWUZLV2lvVDJlOXZET0h5Vk1XbWhITXVadnFqRWU5a1RHa2M0S2oybUNSeHNhLVRoVHhRdC1fM0xXMm50YmI4ZGZXUkVVamhwejAteVVtQnJ0NzlMQkljZ0NPRHlWNGJBQVBub0hGVl91b1hJTE05a1NoclV5bzZIZ3NoM0dfWHpVYjBUSHRBeTlNOUt5cmgtWVljNGJmRTVIRl9nUTFTMW5HVWVWMG5yWjJjaWQ2Tzgtem1uOC1DcUxDSDdTNHZHbHJBIiwiTGFzdE5hbWUiOiJCb3QiLCJidXNUaW1lem9uZUNvZGUiOiJBbWVyaWNhL05ld19Zb3JrIiwiYnVzUG9zdGFsQ29kZSI6IjkwNzQ1IiwiaHBlTWZhT3B0SW4iOiJmYWxzZSIsImhwZUNvbnRhY3RQcmVmZXJlbmNlRW1haWxVcGRhdGVkRGF0ZSI6IjIwMjQtMTAtMTAiLCJvaWRjX2NsYWltX2V4cCI6IjE3NTg4MDEwNTIiLCJVc2VyR3JvdXBzIjpbIlNQNFRTX1BPUlRBTF9GRUFUVVJFX0NVU1RPTUVSX1VTRVJTIiwiU1A0VFNfUE9SVEFMX0ZFQVRVUkVfRkxPV0NNX1VTRVJTIiwicGFzc3BvcnQtc2NpbS1hcHBsaWNhdGlvbi1hc3NpZ25tZW50IiwiR1RTIFNDSU0gQXBwbGljYXRpb24gQXNzaWdubWVudCBHcm91cCIsImlhbS1tZGNwLXNjaW0tb2t0YS11c2VycyIsIk1EQ1AgU0NJTSBhc3NpZ25tZW50IiwiSFBFIEVtcGxveWVlcyIsImlhbS11c2Vycy13aXRob3V0LW1mYS1lbmFibGVkIl0sInJlc2lkZW50Q291bnRyeUNvZGUiOiJVUyIsImhwcFByb2ZpbGVJZCI6IjAwdTI3dnd4M3E1aTBsN2VIMGg4IiwiR1RTIFNDSU0gQXBwbGljYXRpb24gQXNzaWdubWVudCBHcm91cCI6IkhQUCIsImlhbS1tZGNwLXNjaW0tb2t0YS11c2VycyI6IkhQUCIsImxhbmdDb2RlIjoiZW4iLCJ0ZXJtc0NvbmRpdGlvbnNQcml2YWN5IjoidHJ1ZSIsInNic19hY3Rvcl90eXBlIjoiSFBQRU1BSUwiLCJpYW0tdXNlcnMtd2l0aG91dC1tZmEtZW5hYmxlZCI6IkhQUCIsInBhc3Nwb3J0LXNjaW0tYXBwbGljYXRpb24tYXNzaWdubWVudCI6IkhQUCIsImhwZUdUU1VuaXF1ZUlEIjoiOGFiYjViMmUtYmE1Mi00MjBkLTgxOTItOThlMW",
+            "type": "text"
+          },
+          {
+            "key": "x-gss-updates-3",
+            "value": "EzYjk4MGVmIiwiaHBwVXNlcklkIjoiY2hhdF9ocGVzY19sZXhfdXNlckB0ZXN0aHBlLmNvbSIsIkxhbmd1YWdlIjoiZW4iLCJocGVHVFNSUExUaW1lc3RhbXAiOiIyMDI1LTA5LTA1VDEyOjU0OjMzIiwiaHBwX3Byb2ZpbGVJZCI6IjAwdTI3dnd4M3E1aTBsN2VIMGg4Iiwic24iOiJCb3QiLCJzYnNfYWN0b3JfaWQiOiJjaGF0X2hwZXNjX2xleF91c2VyQHRlc3RocGUuY29tIiwib2lkY19jbGFpbV9zdWIiOiIwMHUyN3Z3eDNxNWkwbDdlSDBoOCIsImVtYWlsIjoiY2hhdF9ocGVzY19sZXhfdXNlckB0ZXN0aHBlLmNvbSIsIkJ1c0NvbXBhbnlOYW1lIjoiSFBFICBTIiwiRmlyc3ROYW1lIjoiTWlrZSIsIkJ1c0FkZHJlc3NMaW5lMiI6IjEwMCBIaWdoIFMiLCJidXNDb3VudHJ5Q29kZSI6IlVTIiwiVXNlcklkIjoiY2hhdF9ocGVzY19sZXhfdXNlckB0ZXN0aHBlLmNvbSIsImJ1c0FkZHJlc3NMaW5lMiI6IjEwMCBIaWdoIFMiLCJQaG9uZU51bWJlciI6IiszODE2NTQ1ODc5NjEiLCJidXNBZGRyZXNzTGluZTEiOiIxMDAgSGlnaCBTIiwic2JzX3VzZXJpZGVudGlmaWVyIjoiMDB1Mjd2d3gzcTVpMGw3ZUgwaDgiLCJNb2JpbGVUZWxlcGhvbmVOdW1iZXIiOiIrMzgxNjU0NTg3OTYxIn0sImdyb3VwcyI6WyJTUDRUU19QT1JUQUxfRkVBVFVSRV9DVVNUT01FUl9VU0VSUyIsIlNQNFRTX1BPUlRBTF9GRUFUVVJFX0ZMT1dDTV9VU0VSUyIsIkxPQ0FMX1BPUlRBTF9IUFBfVVNFUlMiLCJMT0NBTF9QT1JUQUxfRVhUX1VTRVJTIiwiR1RTIFNDSU0gQXBwbGljYXRpb24gQXNzaWdubWVudCBHcm91cCIsImlhbS1tZGNwLXNjaW0tb2t0YS11c2VycyIsIkxPQ0FMX1BPUlRBTF9SRUdJU1RFUkVEX1VTRVJTIiwiaWFtLXVzZXJzLXdpdGhvdXQtbWZhLWVuYWJsZWQiLCJMT0NBTF9QT1JUQUxfQ09NUEFOWV9IUEUiLCJMT0NBTF9QT1JUQUxfTEFOR1VBR0VfRU4iLCJMT0NBTF9QT1JUQUxfSUFNX1VTRVJTIiwiTE9DQUxfUE9SVEFMX0NPVU5UUllfSU4iLCJwYXNzcG9ydC1zY2ltLWFwcGxpY2F0aW9uLWFzc2lnbm1lbnQiLCJNRENQIFNDSU0gYXNzaWdubWVudCIsIkhQRSBFbXBsb3llZXMiXX0sImVuX0lOIixbImttX2RvY19wcm9jZXNzZWRfcHJvZHVjdF9oaWVyYXJjaHkiLCJjZXAyX2F1dGhlbnRpY2F0ZWQiLCJjZXAyX3Byb3BhZ2F0ZSIsInJlZGlyZWN0X3NpdGVTdXBwb3J0X3RvX3dlYlNpdGVIZWxwUmVxdWVzdCIsImlhbV9wcmVwYXJlIiwiU0xJTUhGIiwicGFydHNPcmRlcl9zZXJ2aWNlX2xldmVsLmNvbXBsZXRlY2FyZSIsImNlcDJfdXNlciIsImttX3N3X2FkZGl0aW9uYWxfcmVzb3VyY2VzX2VuYWJsZWQiLCJzYTJfdWlfZW5hYmxlX3Rva2VuX2NsaWVudF9jYWNoaW5nIiwiZGlzY2xvc3VyZV9sZXZlbF9zd2RfcGFnZSIsImNoYXRib3RfbGV4X2NhbmFyeV91c2VyIiwiY2VwMl9lbGlnaWJsZSIsImttX3N3X3Nib21OZXdGbG93X2VuYWJsZWQiLCJzd2RfY29sbGVjdGlvbl9wYWdlX2ljbSIsInJlZGlyZWN0X2xpdmVjaGF0X3RvX1ZBIiwiRENTLm1vdGQiLCJrbV9kb2NfYnJva2VuX2xpbmtzX3JlcG9ydCIsIlNBMiIsImttX2luZGV4ZXJzX3VzZV9zZXRoX3F1ZXJpZXMiLCJ1bnN1cHBvcnRlZF9sYW5ndWFnZXNfZm9yX1dlYnNpdGVfSGVscF9SZXF1ZXN0Iiwia21fc3dfc2JvbV9lbmFibGVkIiwiY2hhdGJvdF9wYXJ0b3JkZXJfdXNlcnNfcmFuZG9tIiwia21fZG9jX3ByZXB1Ymxpc2hfY2hlY2tzIiwiaWFtX2VsaWdpYmxlIiwiY2VwMl9oZWFkZXIiLCJEQ1MiLCJrbV9zd19uZXdfc2VjYXBpX2VuYWJsZWQiLCJrbV9zd19icm9hZGNvbV9uZXdfYXV0aGVudGljYXRpb25fZW5hYmxlZCIsImNoYXRib3RfcGFydG9yZGVyX3VzZXIiLCJrbV91bnN1cHBvcnRlZF9jb250ZW50IiwiY2VwMl9lbGlnaWJsZV9yZWd1bGFyIiwia21fc3dfZmVlZGJhY2tfZW5hYmxlZCIsImlhbV91c2VyIiwiREhGV1MiXV0=",
+            "type": "text"
+          },
+          {
+            "key": "x-gss-updates-sig",
+            "value": "TGgD7wsvokoLe02sj3ujHvashyDR4hiocWz+soq5QoGBNO3TfASrnjS+83wCQS3h/1ur2p6Y+vaPCoetfPO+qMfrIiMM1Sjrl3oWrEr1FtSVYElW/yKeWS8BnIhtkhfok9oNC0GK7tc94h+uxIMPd7woEv2Rxc9SisP4bjdf+30wpFZ7nvapK+XyLuSBShb1unY97U8QRChFrUiWnqZDEaGHoTCOp2emPCabwbpL46E917sAhs3Y5E48wSNabATCvJa3ZHBDlbFXYAxVk4ixnkGimCqpTKK3BJ1+vUdylLcvUaPpHGOxdsMmL1svm+niWwcisarkFimefxzA6cOOwg==",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "https://api-int-itg.its.hpecorp.net/apigw/chat/v1alpha1/cases/5400285814",
+          "protocol": "https",
+          "host": [
+            "api-int-itg",
+            "its",
+            "hpecorp",
+            "net"
+          ],
+          "path": [
+            "apigw",
+            "chat",
+            "v1alpha1",
+            "cases",
+            "5400285814"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "/hasOpenOrder",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{tokenExchangeBearerToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "x-gss-updates-sig",
+            "value": "XezG4sZ9vSpdgOlWb8+7p758c3x42Dm8ocgQiNA53316/fn0XqHvt7KwMfYkxUb5FNK6r1Ps3FceS9O6MHq8AxDeBwun0Ufsgm0wkt4D6XwjL637aQjAR/0l8uqtVBeSdHO8NUdh9afdb5BrRmGYomG+1B8ycwQuRiUY6+DPj/J3urZXetlMI68iOlsIatItvMzRWuQFMGPbk7k90otjvxegCL7qfODCXb29fLbwPyzLTUhjjhdkGHk79CCVVShhDyvKLAdFoH++wHIlNjtITksYr2D+02lClVICeAdYFg5HCekdf/tx2aAb9S5NSY2yQQfTMkUceTwAIw1TdRPtAA==",
+            "type": "text",
+            "disabled": true
+          },
+          {
+            "key": "x-gss-updates-1",
+            "value": "WyJnc3MuZHdmLnVzZXJEYXRhIiwiZ3NzLmR3Zi5yZXNvbHZlZExvY2FsZSIsImdzcy5kd2YuZmVhdHVyZUZsYWdzIiwiZ3NzLmR3Zi5waW5uZWQucmVzZXQuZm9yd2FyZGVkIl0=;WyJjb20uaHAuZHdmLnV0aWwudXNlci5SZWdpc3RlcmVkVXNlciIsImphdmEudXRpbC5Mb2NhbGUiLCJqYXZhLnV0aWwuSGFzaFNldCIsImphdmEudXRpbC5EYXRlIl0=;W3siZW1haWwiOiJjaGF0X2hwZXNjX2xleF9wb19uYWlkYUB0ZXN0aHBlLmNvbSIsInVzZXJJRCI6ImNoYXRfaHBlc2NfbGV4X3BvX25haWRhQHRlc3RocGUuY29tIiwicHJvZmlsZUlEIjoiMDB1Mmc2dzU3Zmd5TmNvaTQwaDgiLCJzdWJqZWN0SUQiOiIwMHUyZzZ3NTdmZ3lOY29pNDBoOCIsImZpcnN0TmFtZSI6Ik5haWRhIiwibGFzdE5hbWUiOiJCb3NrYWlsbyIsInBob25lIjoiKzkxNTU1ODc0NjIiLCJwaG9uZUV4dCI6IiIsIm1vYmlsZVBob25lIjoiKzkxNTU1ODc0NjIiLCJyZWdpc3RlcmVkTGFuZ3VhZ2UiOiJlbiIsInJlc2lkZW50Q291bnRyeSI6IlVTIiwiYnVzaW5lc3NOYW1lIjoiT3JnYW5pemF0aW9uIiwiYnVzaW5lc3NTdHJlZXQiOiIyMDEgY2Fyc29uIHN0cmVldCAyMDEgY2Fyc29uIHN0cmVldCIsImJ1c2luZXNzQ2l0eSI6IkNhcnNvbiIsImJ1c2luZXNzU3RhdGUiOiJDYWxpZm9ybmlhIiwiYnVzaW5lc3NQb3N0YWxDb2RlIjoiMTAwMDEiLCJidXNpbmVzc0NvdW50cnkiOiJVUyIsInBhcnRuZXJJZGVudGlmaWVyIjoiIiwiZW1haWxWZXJpZmllZCI6dHJ1ZSwic2NyZWVuaW5nU3RhdHVzIjoiYXBwcm92ZWQiLCJ0aXRsZSI6IiIsImlkbGVUaW1lb3V0Ijo3MjAwLCJ0aW1lem9uZSI6eyJpZCI6IkFtZXJpY2EvQ2hpY2FnbyJ9LCJnZW5lcmF0ZWRUaW1lem9uZSI6eyJpZCI6IkFtZXJpY2EvTG9zX0FuZ2VsZXMifSwicmVzb2x2ZWRMb2NhbGUiOiJlbl9VUyIsImxvZ2luRGF0ZSI6IjIwMjUtMDktMTlUMDU6MTE6MjYuMDAwWiIsImxhc3RMb2dpbkRhdGUiOiIxOTcwLTAxLTAxVDAwOjAwOjAwLjAwMFoiLCJsYXN0TW9kaWZ5RGF0ZSI6IjIwMjUtMDktMThUMTU6Mzc6MzMuMDAwWiIsImNyZWF0aW9uRGF0ZSI6IjE5NzAtMDEtMDFUMDA6MDA6MDAuMDAwWiIsImF1dGhUeXBlIjoiSFBQIiwiYXV0aFNvdXJjZSI6IklBTSIsImFjY291bnRUeXBlIjoiRVhUIiwiYXV0aG9yaXR5IjoiSUFNIiwiY29tcGFueVR5cGUiOiJIUEUiLCJyYXdEYXRhIjp7IlppcCI6IjEwMDAxIiwiUHJvZmlsZUlkIjoiMDB1Mmc2dzU3Zmd5TmNvaTQwaDgiLCJidXNTdGF0ZSI6IkNhbGlmb3JuaWEiLCJFbWFpbCI6ImNoYXRfaHBlc2NfbGV4X3BvX25haWRhQHRlc3RocGUuY29tIiwiaHBlR1RTRW1iYXJnb1N0YXR1cyI6IkFQUFJPVkVEIiwicnBsX3NjcmVlbmluZ1N0YXR1cyI6ImFwcHJvdmVkIiwib2lkY19hY2Nlc3NfdG9rZW4iOiJleUpyYVdRaU9pSlRNblJsVTJSaUxXaFpWVUpmT0ZoUVNucG5kVXRQT0RoQlNEaGZiamN0VDBKaFRrMXlWalZQWVRWaklpd2lZV3huSWpvaVVsTXlOVFlpZlEuZXlKMlpYSWlPakVzSW1wMGFTSTZJa0ZVTGpVMlkwWjJaalZyY0V4bE5uTnhTVkJ5WTFsQlRFcHpaa3RwYkc5VlZVOXdVbTF4VEhSRVVXOU5Oa2t1YjJGeU0ybDFOSHBoTmt0WE5WUXhXV3d3YURjaUxDSnBjM01pT2lKb2RIUndjem92TDJGMWRHZ3RhWFJuTG1od1pTNWpiMjB2YjJGMWRHZ3lMMkYxYzNSd2VuRmljakV3VXpoS2QzQmFNR2czSWl3aVlYVmtJam9pWVhWMGFDMXBkR2N1YUhCbExtTnZiU0lzSW1saGRDSTZNVGMxT0RJMU9EWTVNQ3dpWlhod0lqb3hOelU0TWpZNU5Ea3dMQ0pqYVdRaU9pSXdiMkV4TXpONlpXOXFkMHRQUjJkME1UQm9PQ0lzSW5WcFpDSTZJakF3ZFRKbk5uYzFOMlpuZVU1amIyazBNR2c0SWl3aWMyTndJanBiSW05bVpteHBibVZmWVdOalpYTnpJaXdpY0hKdlptbHNaU0lzSW5SbGJHVndhRzl1WlNJc0ltOXdaVzVwWkNJc0ltVnRZV2xzSWwwc0ltRjFkR2hmZEdsdFpTSTZNVGMxT0RJMU9EWTROaXdpYUhCbFgyaHdjSEJ5YjJacGJHVnBaQ0k2SWpBd2RUSm5ObmMxTjJabmVVNWpiMmswTUdnNElpd2ljM1ZpSWpvaVkyaGhkRjlvY0dWelkxOXNaWGhmY0c5ZmJtRnBaR0ZBZEdWemRHaHdaUzVqYjIwaUxDSnBjMDV2YmtSbFptRjFiSFJCZFhSb1UyVnlkbVZ5SWpvaWRISjFaU0lzSW1od1pWOTFkV2xrSWpvaU1EQjFNbWMyZHpVM1ptZDVUbU52YVRRd2FEZ2lMQ0pIY205MWNITWlPbHNpY0dGemMzQnZjblF0YzJOcGJTMWhjSEJzYVdOaGRHbHZiaTFoYzNOcFoyNXRaVzUwSWl3aVJYWmxjbmx2Ym1VaUxDSkhWRk1nVTBOSlRTQkJjSEJzYVdOaGRHbHZiaUJCYzNOcFoyNXRaVzUwSUVkeWIzVndJaXdpYVdGdExXMWtZM0F0YzJOcGJTMXZhM1JoTFhWelpYSnpJaXdpVFVSRFVDQlRRMGxOSUdGemMybG5ibTFsYm5RaUxDSklVRVVnUlcxd2JHOTVaV1Z6SWl3aWFXRnRMWFZ6WlhKekxYZHBkR2h2ZFhRdGJXWmhMV1Z1WVdKc1pXUWlYU3dpZEdWdVlXNTBTV1FpT2lKb2RXSWlmUS42MFhUZDRaX182dUZGTnNkYTFLc2RsWUFQNDBsc0lwR3NtOHVvS0RpRVdUNEVyWkVvRm5raXhFRlRxOTdBc2Y3ZTZYN0NBNjFsMzNDODJ4bksxMUZ5blpVNXNyRzl3VF9XbjVQRkhRWUNwSkxiZ1VLcG1qYVFwMTZzTmtPQ3ZIbnBULU1ZdHBGNzlzVy15Z0hzRVQzT3l4MXZMb2Q0bTBlV1RTNkl0NnduNVdCWENHLVA5MlZLNHFiMUFjUjh4YklTamhEdVFiU0FHUkxiOHllY0tCZ090YkgxWWpMUS1xWVNOeGhiVnhNT0piTVpnX05KSEVZcThRdi11QzBxQ1J0WFk5SUVraFhyRm82ZGpjdl9XeWxNMnRscjJhbHRpMDNNTGtvOGVTRWJwTVdzWWV3U2VGZzhaODlidENnREstLThSenFRVFFqMzBlNkJtaUp5VkxHN3ciLCJidXNUZWxOdW1iZXIiOiIrOTE1NTU4NzQ2MiIsIlN0cmVldCI6IjIwMSBjYXJzb24gc3RyZWV0IiwiSFBFIEVtcGxveWVlcyI6IkhQUCIsIkJ1c0NvdW50cnlDb2RlIjoiVVMiLCJQQVJUTkVSIjoiTiIsInNic0Rvd25zdHJlYW1TZXJ2aWNlc0ZlZWRiYWNrIjpbXSwiU1BGQXV0aFR5cGUiOiJIUFAiLCJzYnNfdXNlcl90eXBlIjoic2JzX2V4dGVybmFsIiwib2",
+            "type": "text",
+            "disabled": true
+          },
+          {
+            "key": "x-gss-updates-2",
+            "value": "lkY19hY2Nlc3NfdG9rZW5fZXhwaXJlcyI6IjE3NTgyNjk0OTAiLCJocGVHVFNSUExTdGF0dXMiOiJBUFBST1ZFRCIsInBhcnRuZXJfc2JzX2NhbGxfc3RhdHVzX2ZiIjoiUEFSTlRFUl9EQVRBX1JFUVVFU1RFRF9OT05FX0ZPVU5EIiwiZ2l2ZW5OYW1lIjoiTmFpZGEiLCJidXNDb21wYW55TmFtZSI6Ik9yZ2FuaXphdGlvbiIsIkJ1c1RpbWV6b25lQ29kZSI6IkFtZXJpY2EvQ2hpY2FnbyIsImhwZUdUU0VtYmFyZ29UaW1lc3RhbXAiOiIyMDI1LTA5LTE4VDE1OjM3OjMxIiwiQ2l0eSI6IkNhcnNvbiIsInN1YmplY3RJRCI6IjAwdTJnNnc1N2ZneU5jb2k0MGg4IiwibW9iaWxlUGhvbmUiOiIrOTE1NTU4NzQ2MiIsImJ1c0NpdHkiOiJDYXJzb24iLCJNRENQIFNDSU0gYXNzaWdubWVudCI6IkhQUCIsImhwcF91c2VyTmFtZSI6ImNoYXRfaHBlc2NfbGV4X3BvX25haWRhQHRlc3RocGUuY29tIiwiUmVzaWRlbnRDb3VudHJ5Q29kZSI6IlVTIiwiU3RhdGUiOiJDYWxpZm9ybmlhIiwib2lkY19pZF90b2tlbiI6ImV5SnJhV1FpT2lKVE1uUmxVMlJpTFdoWlZVSmZPRmhRU25wbmRVdFBPRGhCU0RoZmJqY3RUMEpoVGsxeVZqVlBZVFZqSWl3aVlXeG5Jam9pVWxNeU5UWWlmUS5leUp6ZFdJaU9pSXdNSFV5WnpaM05UZG1aM2xPWTI5cE5EQm9PQ0lzSW01aGJXVWlPaUpPWVdsa1lTQkNiM05yWVdsc2J5SXNJbVZ0WVdsc0lqb2lZMmhoZEY5b2NHVnpZMTlzWlhoZmNHOWZibUZwWkdGQWRHVnpkR2h3WlM1amIyMGlMQ0oyWlhJaU9qRXNJbWx6Y3lJNkltaDBkSEJ6T2k4dllYVjBhQzFwZEdjdWFIQmxMbU52YlM5dllYVjBhREl2WVhWemRIQjZjV0p5TVRCVE9FcDNjRm93YURjaUxDSmhkV1FpT2lJd2IyRXhNek42Wlc5cWQwdFBSMmQwTVRCb09DSXNJbWxoZENJNk1UYzFPREkxT0RZNU1Dd2laWGh3SWpveE56VTRNall5TWprd0xDSnFkR2tpT2lKSlJDNHhYMVZyUkhWaFVXSmZaVVJrV21SalQzUkpSRk0wVVY4MGNuWTJhRmh4VFdsYWFYTnlXVTFoZFdKcklpd2lZVzF5SWpwYkluQjNaQ0pkTENKcFpIQWlPaUl3TUc5dWNHNXpkM1V3V2tGalJXUjVkekJvTnlJc0ltNXZibU5sSWpvaVEwTjZSekIwWkhOSlJXTXdaa2RmYzFKZk5FaG9ORVYxV0VJMVFtb3lSRzVNYW1WSFdrVm1jV1pOT0NJc0luQnlaV1psY25KbFpGOTFjMlZ5Ym1GdFpTSTZJbU5vWVhSZmFIQmxjMk5mYkdWNFgzQnZYMjVoYVdSaFFIUmxjM1JvY0dVdVkyOXRJaXdpWjJsMlpXNWZibUZ0WlNJNklrNWhhV1JoSWl3aVptRnRhV3g1WDI1aGJXVWlPaUpDYjNOcllXbHNieUlzSW5wdmJtVnBibVp2SWpvaVFXMWxjbWxqWVM5RGFHbGpZV2R2SWl3aVlYVjBhRjkwYVcxbElqb3hOelU0TWpVNE5qZzJMQ0poZEY5b1lYTm9Jam9pUWprMFJUVk1NR2xCYTJGQlJrdDFkRlp6VWxJdFFTSXNJbWx6VG05dVJHVm1ZWFZzZEVGMWRHaFRaWEoyWlhJaU9pSjBjblZsSWl3aWFIQmxYM1YxYVdRaU9pSXdNSFV5WnpaM05UZG1aM2xPWTI5cE5EQm9PQ0lzSW1NaU9pSlZVeUlzSW1od1pWOXRiMkpwYkdWUWFHOXVaU0k2SWlzNU1UVTFOVGczTkRZeUlpd2lZMjRpT2lKT1lXbGtZU0JDYjNOcllXbHNieUlzSW1od1pWOTBhVzFsZW05dVpTSTZJa0Z0WlhKcFkyRXZRMmhwWTJGbmJ5SXNJbE4xWW1wbFkzUWlPaUpqYUdGMFgyaHdaWE5qWDJ4bGVGOXdiMTl1WVdsa1lVQjBaWE4wYUhCbExtTnZiU0lzSW1od1pWOW9jSEJ3Y205bWFXeGxhV1FpT2lJd01IVXlaelozTlRkbVozbE9ZMjlwTkRCb09DSXNJbWh3WlY5d2NtbHRZWEo1VUdodmJtVWlPaUlyT1RFMU5UVTROelEyTWlJc0luVnBaQ0k2SW1Ob1lYUmZhSEJsYzJOZmJHVjRYM0J2WDI1aGFXUmhRSFJsYzNSb2NHVXVZMjl0SWl3aWFIQmxYMk52YlhCaGJubGZibUZ0WlNJNklrOXlaMkZ1YVhwaGRHbHZiaUlzSW1od1pWOWpiMjF3WVc1NVRtRnRaU0k2SWs5eVoyRnVhWHBoZEdsdmJpSXNJbWh3WlY5c2IyTmhiR1VpT2lKbGJsOVZVeUlzSW1od1pWOXdjbVZtWlhKeVpXUk1ZVzVuZFdGblpTSTZJbVZ1SWl3aWFIQmxYMk52ZFc1MGNubGZZMjlrWlNJNklsVlRJbjAuQ1Fxd3dNLV9BMl9sWjJfT3QtTXpYQ3NkV2d2Nm9rSWJvQ1NReFRtc3NYZWY3VkFVSndZblhDZDZTNzNvcWo1eV9uVHNwX043Q0ZiX1RrSHdGdk1ua3k3YnVsODdnQXNuek5aQmRzdDg0UVdITDZtMEp3cGE1d1F5Mk5QVDhXZ2huZkJBOHA0RThoSGhyY1l4RGE3bTlFa1NlczJqZk1xRlRMSUhzREEwaEVJTG54Y2c5OGVHVERNelVFWXNxcEsxZGZkdV9RQl9Vd1NOQUNuZXlZYWY0M2JpRzZ1TFVJSGZGMlk4dzNGbXB4TEVaSXZPdjFTWEE2V2xaSDdlRUp2UUxTLXhUUUtuOWJMeWlSdExjYWQzSlBLMkFOQnFhWTBMNjIzUkNLOUNQbzk3ekNQMThPaXQwUlhOTHFsbXRMX3dQQkZPT3BrcUxkRDNJNm5OSDJRVnFRIiwiTGFzdE5hbWUiOiJCb3NrYWlsbyIsImJ1c1RpbWV6b25lQ29kZSI6IkFtZXJpY2EvQ2hpY2FnbyIsImJ1c1Bvc3RhbENvZGUiOiIxMDAwMSIsImhwZU1mYU9wdEluIjoiZmFsc2UiLCJvaWRjX2NsYWltX2V4cCI6IjE3NTgyNjIyOTAiLCJVc2VyR3JvdXBzIjpbIlNQNFRTX1BPUlRBTF9GRUFUVVJFX0NVU1RPTUVSX1VTRVJTIiwiU1A0VFNfUE9SVEFMX0ZFQVRVUkVfRkxPV0NNX1VTRVJTIiwicGFzc3BvcnQtc2NpbS1hcHBsaWNhdGlvbi1hc3NpZ25tZW50IiwiR1RTIFNDSU0gQXBwbGljYXRpb24gQXNzaWdubWVudCBHcm91cCIsImlhbS1tZGNwLXNjaW0tb2t0YS11c2VycyIsIk1EQ1AgU0NJTSBhc3NpZ25tZW50IiwiSFBFIEVtcGxveWVlcyIsImlhbS11c2Vycy13aXRob3V0LW1mYS1lbmFibGVkIl0sInJlc2lkZW50Q291bnRyeUNvZGUiOiJVUyIsImhwcFByb2ZpbGVJZCI6IjAwdTJnNnc1N2ZneU5jb2k0MGg4IiwiR1RTIFNDSU0gQXBwbGljYXRpb24gQXNzaWdubWVudCBHcm91cCI6IkhQUCIsImlhbS1tZGNwLXNjaW0tb2t0YS11c2VycyI6IkhQUCIsImxhbmdDb2RlIjoiZW4iLCJ0ZXJtc0NvbmRpdGlvbnNQcml2YWN5IjoidHJ1ZSIsInNic19hY3Rvcl90eXBlIjoiSFBQRU1BSUwiLCJpYW0tdXNlcnMtd2l0aG91dC1tZmEtZW5hYmxlZCI6IkhQUC",
+            "type": "text",
+            "disabled": true
+          },
+          {
+            "key": "x-gss-updates-3",
+            "value": "IsInBhc3Nwb3J0LXNjaW0tYXBwbGljYXRpb24tYXNzaWdubWVudCI6IkhQUCIsImhwZUdUU1VuaXF1ZUlEIjoiNTYzODk3MWEtMTRkZC00OWU2LTk1ZTEtNjQwMTliMDMxY2JiIiwiaHBwVXNlcklkIjoiY2hhdF9ocGVzY19sZXhfcG9fbmFpZGFAdGVzdGhwZS5jb20iLCJMYW5ndWFnZSI6ImVuIiwiaHBlR1RTUlBMVGltZXN0YW1wIjoiMjAyNS0wOS0xOFQxNTozNzozMSIsImhwcF9wcm9maWxlSWQiOiIwMHUyZzZ3NTdmZ3lOY29pNDBoOCIsInNuIjoiQm9za2FpbG8iLCJzYnNfYWN0b3JfaWQiOiJjaGF0X2hwZXNjX2xleF9wb19uYWlkYUB0ZXN0aHBlLmNvbSIsIm9pZGNfY2xhaW1fc3ViIjoiMDB1Mmc2dzU3Zmd5TmNvaTQwaDgiLCJlbWFpbCI6ImNoYXRfaHBlc2NfbGV4X3BvX25haWRhQHRlc3RocGUuY29tIiwiQnVzQ29tcGFueU5hbWUiOiJPcmdhbml6YXRpb24iLCJGaXJzdE5hbWUiOiJOYWlkYSIsIkJ1c0FkZHJlc3NMaW5lMiI6IjIwMSBjYXJzb24gc3RyZWV0IiwiYnVzQ291bnRyeUNvZGUiOiJVUyIsIlVzZXJJZCI6ImNoYXRfaHBlc2NfbGV4X3BvX25haWRhQHRlc3RocGUuY29tIiwiYnVzQWRkcmVzc0xpbmUyIjoiMjAxIGNhcnNvbiBzdHJlZXQiLCJQaG9uZU51bWJlciI6Iis5MTU1NTg3NDYyIiwiYnVzQWRkcmVzc0xpbmUxIjoiMjAxIGNhcnNvbiBzdHJlZXQiLCJzYnNfdXNlcmlkZW50aWZpZXIiOiIwMHUyZzZ3NTdmZ3lOY29pNDBoOCIsIk1vYmlsZVRlbGVwaG9uZU51bWJlciI6Iis5MTU1NTg3NDYyIn0sImdyb3VwcyI6WyJTUDRUU19QT1JUQUxfRkVBVFVSRV9DVVNUT01FUl9VU0VSUyIsIlNQNFRTX1BPUlRBTF9GRUFUVVJFX0ZMT1dDTV9VU0VSUyIsIkxPQ0FMX1BPUlRBTF9IUFBfVVNFUlMiLCJMT0NBTF9QT1JUQUxfRVhUX1VTRVJTIiwiR1RTIFNDSU0gQXBwbGljYXRpb24gQXNzaWdubWVudCBHcm91cCIsIkxPQ0FMX1BPUlRBTF9DT1VOVFJZX1VTIiwiaWFtLW1kY3Atc2NpbS1va3RhLXVzZXJzIiwiTE9DQUxfUE9SVEFMX1JFR0lTVEVSRURfVVNFUlMiLCJpYW0tdXNlcnMtd2l0aG91dC1tZmEtZW5hYmxlZCIsIkxPQ0FMX1BPUlRBTF9DT01QQU5ZX0hQRSIsIkxPQ0FMX1BPUlRBTF9MQU5HVUFHRV9FTiIsIkxPQ0FMX1BPUlRBTF9JQU1fVVNFUlMiLCJwYXNzcG9ydC1zY2ltLWFwcGxpY2F0aW9uLWFzc2lnbm1lbnQiLCJNRENQIFNDSU0gYXNzaWdubWVudCIsIkhQRSBFbXBsb3llZXMiXX0sImVuX1VTIixbImttX2RvY19wcm9jZXNzZWRfcHJvZHVjdF9oaWVyYXJjaHkiLCJjZXAyX2F1dGhlbnRpY2F0ZWQiLCJjZXAyX3Byb3BhZ2F0ZSIsInJlZGlyZWN0X3NpdGVTdXBwb3J0X3RvX3dlYlNpdGVIZWxwUmVxdWVzdCIsImlhbV9wcmVwYXJlIiwiU0xJTUhGIiwicGFydHNPcmRlcl9zZXJ2aWNlX2xldmVsLmNvbXBsZXRlY2FyZSIsImNlcDJfdXNlciIsImttX3N3X2FkZGl0aW9uYWxfcmVzb3VyY2VzX2VuYWJsZWQiLCJzYTJfdWlfZW5hYmxlX3Rva2VuX2NsaWVudF9jYWNoaW5nIiwiZGlzY2xvc3VyZV9sZXZlbF9zd2RfcGFnZSIsImNoYXRib3RfbGV4X2NhbmFyeV91c2VyIiwiY2VwMl9lbGlnaWJsZSIsImttX3N3X3Nib21OZXdGbG93X2VuYWJsZWQiLCJzd2RfY29sbGVjdGlvbl9wYWdlX2ljbSIsInJlZGlyZWN0X2xpdmVjaGF0X3RvX1ZBIiwiRENTLm1vdGQiLCJrbV9kb2NfYnJva2VuX2xpbmtzX3JlcG9ydCIsIlNBMiIsImttX2luZGV4ZXJzX3VzZV9zZXRoX3F1ZXJpZXMiLCJ1bnN1cHBvcnRlZF9sYW5ndWFnZXNfZm9yX1dlYnNpdGVfSGVscF9SZXF1ZXN0Iiwia21fc3dfc2JvbV9lbmFibGVkIiwiY2hhdGJvdF9wYXJ0b3JkZXJfdXNlcnNfcmFuZG9tIiwia21fZG9jX3ByZXB1Ymxpc2hfY2hlY2tzIiwiaWFtX2VsaWdpYmxlIiwiY2VwMl9oZWFkZXIiLCJEQ1MiLCJrbV9zd19uZXdfc2VjYXBpX2VuYWJsZWQiLCJrbV9zd19icm9hZGNvbV9uZXdfYXV0aGVudGljYXRpb25fZW5hYmxlZCIsImNoYXRib3RfcGFydG9yZGVyX3VzZXIiLCJrbV91bnN1cHBvcnRlZF9jb250ZW50IiwiY2VwMl9lbGlnaWJsZV9yZWd1bGFyIiwia21fc3dfZmVlZGJhY2tfZW5hYmxlZCIsImlhbV91c2VyIiwiREhGV1MiXSwiMjAyNS0wOS0xOVQwNToxMjoxNy44NDNaIl0=",
+            "type": "text",
+            "disabled": true
+          },
+          {
+            "key": "x-gss-updates-1",
+            "value": "WyJnc3MuZHdmLnVzZXJEYXRhIiwiZ3NzLmR3Zi5yZXNvbHZlZExvY2FsZSIsImdzcy5kd2YuZmVhdHVyZUZsYWdzIiwiZ3NzLmR3Zi5waW5uZWQucmVzZXQuZm9yd2FyZGVkIl0=;WyJjb20uaHAuZHdmLnV0aWwudXNlci5SZWdpc3RlcmVkVXNlciIsImphdmEudXRpbC5Mb2NhbGUiLCJqYXZhLnV0aWwuSGFzaFNldCIsImphdmEudXRpbC5EYXRlIl0=;W3siZW1haWwiOiJjaGFrcmFfaHBlc2NfbGV4X3VzZXJAdGVzdGhwZS5jb20iLCJ1c2VySUQiOiJjaGFrcmFfaHBlc2NfbGV4X3VzZXJAdGVzdGhwZS5jb20iLCJwcm9maWxlSUQiOiIwMHUyYmhqMnplNG5wZU9HQjBoOCIsInN1YmplY3RJRCI6IjAwdTJiaGoyemU0bnBlT0dCMGg4IiwiZmlyc3ROYW1lIjoiVGVhbSIsImxhc3ROYW1lIjoiQ2hha3JhIiwicGhvbmUiOiIiLCJwaG9uZUV4dCI6IiIsIm1vYmlsZVBob25lIjoiIiwicmVnaXN0ZXJlZExhbmd1YWdlIjoiIiwicmVzaWRlbnRDb3VudHJ5IjoiSU4iLCJidXNpbmVzc05hbWUiOiJBZ2lsaWFkIiwiYnVzaW5lc3NTdHJlZXQiOiIiLCJidXNpbmVzc0NpdHkiOiIiLCJidXNpbmVzc1N0YXRlIjoiIiwiYnVzaW5lc3NQb3N0YWxDb2RlIjoiIiwiYnVzaW5lc3NDb3VudHJ5IjoiSU4iLCJwYXJ0bmVySWRlbnRpZmllciI6IiIsImVtYWlsVmVyaWZpZWQiOnRydWUsInNjcmVlbmluZ1N0YXR1cyI6ImFwcHJvdmVkIiwidGl0bGUiOiIiLCJpZGxlVGltZW91dCI6NzIwMCwiZ2VuZXJhdGVkVGltZXpvbmUiOnsiaWQiOiJBbWVyaWNhL0xvc19BbmdlbGVzIn0sInJlc29sdmVkTG9jYWxlIjoiZW5fVVMiLCJsb2dpbkRhdGUiOiIyMDI1LTA5LTIyVDEyOjE4OjI4LjAwMFoiLCJsYXN0TG9naW5EYXRlIjoiMTk3MC0wMS0wMVQwMDowMDowMC4wMDBaIiwibGFzdE1vZGlmeURhdGUiOiIyMDI1LTAxLTMwVDA5OjUyOjI4LjAwMFoiLCJjcmVhdGlvbkRhdGUiOiIxOTcwLTAxLTAxVDAwOjAwOjAwLjAwMFoiLCJhdXRoVHlwZSI6IkhQUCIsImF1dGhTb3VyY2UiOiJJQU0iLCJhY2NvdW50VHlwZSI6IkVYVCIsImF1dGhvcml0eSI6IklBTSIsImNvbXBhbnlUeXBlIjoiSFBFIiwicmF3RGF0YSI6eyJQcm9maWxlSWQiOiIwMHUyYmhqMnplNG5wZU9HQjBoOCIsIkVtYWlsIjoiY2hha3JhX2hwZXNjX2xleF91c2VyQHRlc3RocGUuY29tIiwiaHBlR1RTRW1iYXJnb1N0YXR1cyI6IkFQUFJPVkVEIiwicnBsX3NjcmVlbmluZ1N0YXR1cyI6ImFwcHJvdmVkIiwib2lkY19hY2Nlc3NfdG9rZW4iOiJleUpyYVdRaU9pSlRNblJsVTJSaUxXaFpWVUpmT0ZoUVNucG5kVXRQT0RoQlNEaGZiamN0VDBKaFRrMXlWalZQWVRWaklpd2lZV3huSWpvaVVsTXlOVFlpZlEuZXlKMlpYSWlPakVzSW1wMGFTSTZJa0ZVTGtoaWNrUk1SRmg0YUc5amNtTnpSRkJXVFZCNFNHMTRiVWhPYmsxRFYwVm9hVFJXV0RoNU9YZFJVRGd1YjJGeU0ybDVOV2hqWWpORWVYTTFaMHN3YURjaUxDSnBjM01pT2lKb2RIUndjem92TDJGMWRHZ3RhWFJuTG1od1pTNWpiMjB2YjJGMWRHZ3lMMkYxYzNSd2VuRmljakV3VXpoS2QzQmFNR2czSWl3aVlYVmtJam9pWVhWMGFDMXBkR2N1YUhCbExtTnZiU0lzSW1saGRDSTZNVGMxT0RVME16VXhNaXdpWlhod0lqb3hOelU0TlRVME16RXlMQ0pqYVdRaU9pSXdiMkV4TXpONlpXOXFkMHRQUjJkME1UQm9PQ0lzSW5WcFpDSTZJakF3ZFRKaWFHb3llbVUwYm5CbFQwZENNR2c0SWl3aWMyTndJanBiSW05bVpteHBibVZmWVdOalpYTnpJaXdpYjNCbGJtbGtJaXdpZEdWc1pYQm9iMjVsSWl3aWNISnZabWxzWlNJc0ltVnRZV2xzSWwwc0ltRjFkR2hmZEdsdFpTSTZNVGMxT0RVME16VXdPQ3dpYUhCbFgyaHdjSEJ5YjJacGJHVnBaQ0k2SWpBd2RUSmlhR295ZW1VMGJuQmxUMGRDTUdnNElpd2ljM1ZpSWpvaVkyaGhhM0poWDJod1pYTmpYMnhsZUY5MWMyVnlRSFJsYzNSb2NHVXVZMjl0SWl3aWFYTk9iMjVFWldaaGRXeDBRWFYwYUZObGNuWmxjaUk2SW5SeWRXVWlMQ0pvY0dWZmRYVnBaQ0k2SWpBd2RUSmlhR295ZW1VMGJuQmxUMGRDTUdnNElpd2lSM0p2ZFhCeklqcGJJbkJoYzNOd2IzSjBMWE5qYVcwdFlYQndiR2xqWVhScGIyNHRZWE56YVdkdWJXVnVkQ0lzSWtWMlpYSjViMjVsSWl3aWFXRnRMVzFrWTNBdGMyTnBiUzF2YTNSaExYVnpaWEp6SWl3aVRVUkRVQ0JUUTBsTklHRnpjMmxuYm0xbGJuUWlMQ0pJVUVVZ1JXMXdiRzk1WldWeklpd2lhV0Z0TFhWelpYSnpMWGRwZEdodmRYUXRiV1poTFdWdVlXSnNaV1FpWFN3aWRHVnVZVzUwU1dRaU9pSm9kV0lpZlEuczdXYk0tTlJaSkNuV0ZLVUhObE02RzA3ODZVMERrWVJnanE2ck1ZNVRBMjZsOThMMzY1WUVBNWphcGo0Ukg2bDdYZTctVlA4TGk4ZnNvM2dGb3VxcXkza2tqcmU2M19JOC13ZzZzMl9Wa1lpQ0lCTDl3cXZHdU9Xb0xEd2xWN3MteFRIeGhsdkxhcndrT2RvLWR3bXBKZkxVcUpPWkwxalpsbl83MFBWaFZvb0hPSTZuWkFISEd5QkY2X2VWaFoyaERVR1hPTGVqZzVhbjMxWTB0TUFGODNBZEs0MGl1b2RBOEVTTm5CdDlZaW5lNHVweFBTUzMzMldpcWtfb1ZoREg5WUdFbm80UHVCRmN1WnN1VXZzZDYwczRUcmZ3TWlCVDU0SDE1RXJEWHUwRmdsODFDOWV0NXRveHBneWVSR09jc19ad2trbThxTUtUazBKUUZTelN3IiwiRW1haWxDb250YWN0UHJlZiI6IlkiLCJIUEUgRW1wbG95ZWVzIjoiSFBQIiwiQnVzQ291bnRyeUNvZGUiOiJJTiIsIlBBUlRORVIiOiJOIiwic2JzRG93bnN0cmVhbVNlcnZpY2VzRmVlZGJhY2siOltdLCJTUEZBdXRoVHlwZSI6IkhQUCIsInNic191c2VyX3R5cGUiOiJzYnNfZXh0ZXJuYWwiLCJvaWRjX2FjY2Vzc190b2tlbl9leHBpcmVzIjoiMTc1ODU1NDMxMyIsImhwZUdUU1JQTFN0YXR1cyI6IkFQUFJPVkVEIiwiZ2l2ZW5OYW1lIjoiVGVhbSIsInBhcnRuZXJfc2JzX2NhbGxfc3RhdHVzX2ZiIjoiUEFSTlRFUl9EQVRBX1JFUVVFU1RFRF9OT05FX0ZPVU5EIiwiYnVzQ29tcGFueU5hbWUiOiJBZ2lsaWFkIiwiUGhvbmVDb250YWN0UHJlZiI6Ik4iLCJocGVHVFNFbWJhcmdvVGltZXN0YW1wIjoiMjAyNS0wMS0zMFQwOTo1MzowMiIsInN1YmplY3RJRC",
+            "type": "text"
+          },
+          {
+            "key": "x-gss-updates-2",
+            "value": "I6IjAwdTJiaGoyemU0bnBlT0dCMGg4IiwiY29udGFjdFByZWZUZWwiOiJOIiwiY29udGFjdFByZWZFbWFpbCI6IlkiLCJSZXNpZGVudENvdW50cnlDb2RlIjoiSU4iLCJocHBfdXNlck5hbWUiOiJjaGFrcmFfaHBlc2NfbGV4X3VzZXJAdGVzdGhwZS5jb20iLCJNRENQIFNDSU0gYXNzaWdubWVudCI6IkhQUCIsIm9pZGNfaWRfdG9rZW4iOiJleUpyYVdRaU9pSlRNblJsVTJSaUxXaFpWVUpmT0ZoUVNucG5kVXRQT0RoQlNEaGZiamN0VDBKaFRrMXlWalZQWVRWaklpd2lZV3huSWpvaVVsTXlOVFlpZlEuZXlKemRXSWlPaUl3TUhVeVltaHFNbnBsTkc1d1pVOUhRakJvT0NJc0ltNWhiV1VpT2lKVVpXRnRJRU5vWVd0eVlTSXNJbVZ0WVdsc0lqb2lZMmhoYTNKaFgyaHdaWE5qWDJ4bGVGOTFjMlZ5UUhSbGMzUm9jR1V1WTI5dElpd2lkbVZ5SWpveExDSnBjM01pT2lKb2RIUndjem92TDJGMWRHZ3RhWFJuTG1od1pTNWpiMjB2YjJGMWRHZ3lMMkYxYzNSd2VuRmljakV3VXpoS2QzQmFNR2czSWl3aVlYVmtJam9pTUc5aE1UTXplbVZ2YW5kTFQwZG5kREV3YURnaUxDSnBZWFFpT2pFM05UZzFORE0xTVRJc0ltVjRjQ0k2TVRjMU9EVTBOekV4TWl3aWFuUnBJam9pU1VRdVQwZEtjRVZ1VFUxcGVreFFNSGh0TFZJMFNETnRZWFpQUmpSa2Jsa3hlREZ3VkZCSFJWWkNUR3hhUlNJc0ltRnRjaUk2V3lKd2QyUWlYU3dpYVdSd0lqb2lNREJ2Ym5CdWMzZDFNRnBCWTBWa2VYY3dhRGNpTENKdWIyNWpaU0k2SWxNMU1rSjNiMk5KVURKcFgyaE1kVlpwU2xCbVZqZEZkVTlOVkd4V1oyeHFkSGhpTlhCcU5GOWtXV2NpTENKd2NtVm1aWEp5WldSZmRYTmxjbTVoYldVaU9pSmphR0ZyY21GZmFIQmxjMk5mYkdWNFgzVnpaWEpBZEdWemRHaHdaUzVqYjIwaUxDSm5hWFpsYmw5dVlXMWxJam9pVkdWaGJTSXNJbVpoYldsc2VWOXVZVzFsSWpvaVEyaGhhM0poSWl3aVlYVjBhRjkwYVcxbElqb3hOelU0TlRRek5UQTRMQ0poZEY5b1lYTm9Jam9pUlV0RGRqRmZVekJ4UWtoSmJGaGZNR05tT1U5NVFTSXNJbWh3WlY5b2NIQndjbTltYVd4bGFXUWlPaUl3TUhVeVltaHFNbnBsTkc1d1pVOUhRakJvT0NJc0ltbHpUbTl1UkdWbVlYVnNkRUYxZEdoVFpYSjJaWElpT2lKMGNuVmxJaXdpZFdsa0lqb2lZMmhoYTNKaFgyaHdaWE5qWDJ4bGVGOTFjMlZ5UUhSbGMzUm9jR1V1WTI5dElpd2lhSEJsWDNWMWFXUWlPaUl3TUhVeVltaHFNbnBsTkc1d1pVOUhRakJvT0NJc0ltTWlPaUpKVGlJc0ltaHdaVjlqYjIxd1lXNTVYMjVoYldVaU9pSkJaMmxzYVdGa0lpd2lZMjRpT2lKVVpXRnRJRU5vWVd0eVlTSXNJbE4xWW1wbFkzUWlPaUpqYUdGcmNtRmZhSEJsYzJOZmJHVjRYM1Z6WlhKQWRHVnpkR2h3WlM1amIyMGlMQ0pvY0dWZlkyOXRjR0Z1ZVU1aGJXVWlPaUpCWjJsc2FXRmtJaXdpYUhCbFgyeHZZMkZzWlNJNkltVnVYMVZUSWl3aWFIQmxYMk52ZFc1MGNubGZZMjlrWlNJNklrbE9JbjAuakhkeXpRTFJ0M0FjaTRFNWpYQ21wOWZQNHhjM1kxem8xaFRZSF9BaUQzVWVPVDJQcG40ZGZIU3FUWjRTT1UxWDVXNlFPRHBDZ014bkZlNllhc0QzcnVkNnhSNG1zMVhlWEd4TTA0V2hhVVRpbWhlLWVtSXhaZ0hLcWp3eEJmT05kQWVZakZJdU1SRjB1SDNQcUhSZi1QNEsyNmIwSUlGS09xeWV3X3NWVTNxeVdCZ29JTU0xbDJDektMVmpfSUtyT2F5TjNEc0p5V2Zka1l5NzU2NUlqQ1lNNEVDaHNldTd4U1M4NjFRR1VWVm9xaVNBZndvUHhUbU5xcGFPR2k1VEt2OTBVdHBmaGNKbjR6V2tBUGlzQ044UGI0MlFYang2VVRQOEhlRjVsTEVtRURDZmN2dWFxRzdZajRpclRqMlFndlNaUW5RMlJQbGxFYkE4V1plaHFnIiwiTGFzdE5hbWUiOiJDaGFrcmEiLCJocGVNZmFPcHRJbiI6ImZhbHNlIiwiaHBlQ29udGFjdFByZWZlcmVuY2VFbWFpbFVwZGF0ZWREYXRlIjoiMjAyNS0xLTMwIiwib2lkY19jbGFpbV9leHAiOiIxNzU4NTQ3MTEyIiwiVXNlckdyb3VwcyI6WyJTUDRUU19QT1JUQUxfRkVBVFVSRV9DVVNUT01FUl9VU0VSUyIsIlNQNFRTX1BPUlRBTF9GRUFUVVJFX0ZMT1dDTV9VU0VSUyIsInBhc3Nwb3J0LXNjaW0tYXBwbGljYXRpb24tYXNzaWdubWVudCIsImlhbS1tZGNwLXNjaW0tb2t0YS11c2VycyIsIk1EQ1AgU0NJTSBhc3NpZ25tZW50IiwiSFBFIEVtcGxveWVlcyIsImlhbS11c2Vycy13aXRob3V0LW1mYS1lbmFibGVkIl0sInJlc2lkZW50Q291bnRyeUNvZGUiOiJJTiIsImhwcFByb2ZpbGVJZCI6IjAwdTJiaGoyemU0bnBlT0dCMGg4IiwiaWFtLW1kY3Atc2NpbS1va3RhLXVzZXJzIjoiSFBQIiwidGVybXNDb25kaXRpb25zUHJpdmFjeSI6InRydWUiLCJzYnNfYWN0b3JfdHlwZSI6IkhQUEVNQUlMIiwiaWFtLXVzZXJzLXdpdGhvdXQtbWZhLWVuYWJsZWQiOiJIUFAiLCJwYXNzcG9ydC1zY2ltLWFwcGxpY2F0aW9uLWFzc2lnbm1lbnQiOiJIUFAiLCJocGVHVFNVbmlxdWVJRCI6IjRmN2VkM2EyLThmYTktNGVjYS05NDNkLWE5NDM1ZDRhMzI2MyIsImhwcFVzZXJJZCI6ImNoYWtyYV9ocGVzY19sZXhfdXNlckB0ZXN0aHBlLmNvbSIsImhwZUdUU1JQTFRpbWVzdGFtcCI6IjIwMjUtMDEtMzBUMDk6NTM6MDIiLCJocHBfcHJvZmlsZUlkIjoiMDB1MmJoajJ6ZTRucGVPR0IwaDgiLCJzbiI6IkNoYWtyYSIsInNic19hY3Rvcl9pZCI6ImNoYWtyYV9ocGVzY19sZXhfdXNlckB0ZXN0aHBlLmNvbSIsIm9pZGNfY2xhaW1fc3ViIjoiMDB1MmJoajJ6ZTRucGVPR0IwaDgiLCJlbWFpbCI6ImNoYWtyYV9ocGVzY19sZXhfdXNlckB0ZXN0aHBlLmNvbSIsIkJ1c0NvbXBhbnlOYW1lIjoiQWdpbGlhZCIsIkZpcnN0TmFtZSI6IlRlYW0iLCJidXNDb3VudHJ5Q29kZSI6IklOIiwiVXNlcklkIjoiY2hha3JhX2hwZXNjX2xleF91c2VyQHRlc3RocGUuY29tIiwiaHBlQ29udGFjdFByZWZlcmVuY2VQaG9uZVVwZGF0ZWREYXRlIjoiMjAyNS0xLTMwIiwic2JzX3VzZXJpZGVudGlmaWVyIjoiMDB1MmJoajJ6ZTRucGVPR0IwaDgifSwiZ3JvdXBzIjpbIlNQNFRTX1BPUlRBTF9GRUFUVVJFX0NVU1RPTUVSX1VTRVJTIiwiU1A0VFNfUE9SVEFMX0ZFQVRVUkVfRkxPV0NNX1VTRVJTIiwiTE",
+            "type": "text"
+          },
+          {
+            "key": "x-gss-updates-3",
+            "value": "9DQUxfUE9SVEFMX0hQUF9VU0VSUyIsIkxPQ0FMX1BPUlRBTF9FWFRfVVNFUlMiLCJMT0NBTF9QT1JUQUxfQ09VTlRSWV9VUyIsImlhbS1tZGNwLXNjaW0tb2t0YS11c2VycyIsIkxPQ0FMX1BPUlRBTF9SRUdJU1RFUkVEX1VTRVJTIiwiaWFtLXVzZXJzLXdpdGhvdXQtbWZhLWVuYWJsZWQiLCJMT0NBTF9QT1JUQUxfQ09NUEFOWV9IUEUiLCJMT0NBTF9QT1JUQUxfTEFOR1VBR0VfRU4iLCJMT0NBTF9QT1JUQUxfSUFNX1VTRVJTIiwicGFzc3BvcnQtc2NpbS1hcHBsaWNhdGlvbi1hc3NpZ25tZW50IiwiTURDUCBTQ0lNIGFzc2lnbm1lbnQiLCJIUEUgRW1wbG95ZWVzIl19LCJlbl9VUyIsWyJrbV9kb2NfcHJvY2Vzc2VkX3Byb2R1Y3RfaGllcmFyY2h5IiwiY2VwMl9hdXRoZW50aWNhdGVkIiwiY2VwMl9wcm9wYWdhdGUiLCJyZWRpcmVjdF9zaXRlU3VwcG9ydF90b193ZWJTaXRlSGVscFJlcXVlc3QiLCJpYW1fcHJlcGFyZSIsIlNMSU1IRiIsInBhcnRzT3JkZXJfc2VydmljZV9sZXZlbC5jb21wbGV0ZWNhcmUiLCJjZXAyX3VzZXIiLCJrbV9zd19hZGRpdGlvbmFsX3Jlc291cmNlc19lbmFibGVkIiwic2EyX3VpX2VuYWJsZV90b2tlbl9jbGllbnRfY2FjaGluZyIsImRpc2Nsb3N1cmVfbGV2ZWxfc3dkX3BhZ2UiLCJjaGF0Ym90X2xleF9jYW5hcnlfdXNlciIsImNlcDJfZWxpZ2libGUiLCJrbV9zd19zYm9tTmV3Rmxvd19lbmFibGVkIiwic3dkX2NvbGxlY3Rpb25fcGFnZV9pY20iLCJyZWRpcmVjdF9saXZlY2hhdF90b19WQSIsIkRDUy5tb3RkIiwia21fZG9jX2Jyb2tlbl9saW5rc19yZXBvcnQiLCJTQTIiLCJrbV9pbmRleGVyc191c2Vfc2V0aF9xdWVyaWVzIiwidW5zdXBwb3J0ZWRfbGFuZ3VhZ2VzX2Zvcl9XZWJzaXRlX0hlbHBfUmVxdWVzdCIsImttX3N3X3Nib21fZW5hYmxlZCIsImNoYXRib3RfcGFydG9yZGVyX3VzZXJzX3JhbmRvbSIsImttX2RvY19wcmVwdWJsaXNoX2NoZWNrcyIsImlhbV9lbGlnaWJsZSIsImNlcDJfaGVhZGVyIiwiRENTIiwia21fc3dfbmV3X3NlY2FwaV9lbmFibGVkIiwia21fc3dfYnJvYWRjb21fbmV3X2F1dGhlbnRpY2F0aW9uX2VuYWJsZWQiLCJjaGF0Ym90X3BhcnRvcmRlcl91c2VyIiwia21fdW5zdXBwb3J0ZWRfY29udGVudCIsImNlcDJfZWxpZ2libGVfcmVndWxhciIsImttX3N3X2ZlZWRiYWNrX2VuYWJsZWQiLCJpYW1fdXNlciIsIkRIRldTIl0sIjIwMjUtMDktMjJUMTI6MTc6NTMuOTk2WiJd",
+            "type": "text"
+          },
+          {
+            "key": "x-gss-updates-sig",
+            "value": "X2jX8l9yHkUsSRqSPJ8eTL/XWwCewdH+thxp2VtFeHQCcC2z+9SCiqdRFLnHLXLt3h7eRG8x/n2ZVVQeSTlxawz71tsy/cSviJHPbYrl+epo5nNUqW8AZnTc24FgdjnA91QxPbJmZGmOrB1C4qLy3JW1tricYAAe+g6oHsrCjhcw7DVRAH8W8Vr3hXdKpWpJYDJPpthNlS5bPrtCdcm9iz4kFkd5pM6szN5XHBy+FNKPO1KCIkT8cOXtTstB0ZUjstIyjz8rdQ7j1mOoI8WFAPpVNLqShF3KvwDCpzXSPntdCpF7lUT9kqLn6u5SfkMH2n4O2E2tHZesQ+Qz4/7stQ==",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "https://api-int-itg.its.hpecorp.net/apigw/chat/v1alpha1/assets/CZ214205C6/869119-B21/hasPartOrder?part-number=872737-001",
+          "protocol": "https",
+          "host": [
+            "api-int-itg",
+            "its",
+            "hpecorp",
+            "net"
+          ],
+          "path": [
+            "apigw",
+            "chat",
+            "v1alpha1",
+            "assets",
+            "CZ214205C6",
+            "869119-B21",
+            "hasPartOrder"
+          ],
+          "query": [
+            {
+              "key": "serial-number",
+              "value": "CZ214205C6",
+              "disabled": true
+            },
+            {
+              "key": "product-number",
+              "value": "869119-B21",
+              "disabled": true
+            },
+            {
+              "key": "part-number",
+              "value": "872737-001"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "create part order",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{tokenExchangeBearerToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"caseNumber\": \"5333351855\",\r\n    \"originalRequestedSparePart\": \"MXQ1070QZF\",\r\n    \"sparePartNumber\": \"870794-001\",\r\n    \"sparePartDescription\": \"SPS-DRV HDD 600GB 12G 15K SFF SAS ENT SC\",\r\n    \"rohsCode\": \"COMPLY_2306\",\r\n    \"csrCode\": \"A\",\r\n    \"estimatedArrivalTime\": \"2025-06-11T16:33:00Z\",\r\n    \"partResponseCode\": \"SUCCESS\",\r\n    \"shipFromPlantCode\": \"C299\",\r\n    \"addressType\": \"DPPUL\",\r\n    \"customerAddress\": {\r\n        \"companyName\": \"AVNET INC\",\r\n        \"firstName\": \"Vincent\",\r\n        \"lastName\": \"Martyn\",\r\n        \"street1\": \"7402 W Detroit St\",\r\n        \"street2\": \"Stree2\",\r\n        \"city\": \"Chandler\",\r\n        \"state\": \"AZ\",\r\n        \"country\": \"US\",\r\n        \"countryCode\": \"US\",\r\n        \"postalCode\": \"85226-2429\",\r\n        \"contactPhoneNo\": \"+35391754772\",\r\n        \"email\":\"va_po_en_01@groups.ext.hpe.com\"\r\n    },\r\n    \"requestedPartQuantity\": 1,\r\n    \"deliveryPriorityCode\": \"615\",\r\n    \"customerRequestedDatetime\": \"2025-12-05T16:00:00Z\",\r\n    \"deliveryNotes\": \"\",\r\n    \"client\": \"VA\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://api-gw-ext-itg.support.hpe.com/apigwext/chat/v1alpha1/cases/5400171619/parts",
+          "protocol": "https",
+          "host": [
+            "api-gw-ext-itg",
+            "support",
+            "hpe",
+            "com"
+          ],
+          "path": [
+            "apigwext",
+            "chat",
+            "v1alpha1",
+            "cases",
+            "5400171619",
+            "parts"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
