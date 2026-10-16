@@ -1,0 +1,4 @@
+Host 10.12.211.233
+HostName 10.12.211.233
+User ubuntu
+IdentityFile "C:\Users\aditya.senapati\.ssh\aditya.ppk"
