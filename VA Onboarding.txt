@@ -1,0 +1,143 @@
++Access Sheet:
+https://docs.google.com/spreadsheets/d/1bZ9_XomIYsbVyNY-lah4Lo2lK34OMJKvWhVSx8mYres/edit?gid=0#gid=0
+
+
+HPE support contact number: 0008000504310 
+
+—----------
+
+Repo access:
+
+Join slack channel: project-pointnext-rnd-github-access
+
+Ask for below repo access:
+Repositories
+
+Request read/write access for below repos in slack group.
+
+https://github.hpe.com/TS-RnD/VirtualAgent
+	
+https://github.hpe.com/TS-RnD/pse-chat-core
+
+https://github.hpe.com/TS-RnD/chat-domain-api
+
+https://github.hpe.com/TS-RnD/chat-analytics 
+
+Ping James Busari for below repo access
+
+
+https://github.com/HPE-EMU/va-aws-lambda-hpesclexbot
+
+https://github.com/HPE-EMU/va-aws-lambda-commonservices
+
+
+
+—--------------
+
+
+AWS: 
+link to access https://d-9067827495.awsapps.com/start/#/?tab=accounts
+To request access fill in the form: Request access for the AWS Account (Copy) – Fill out form
+
+Ping Liam Dolan on teams 1-1 and inform him that you have filled in the form and need DEV access for AWS 
+
+
+—-------------------
+
+Outlook link: 
+https://outlook.office365.com/mail/
+
+Login with HPE email 
+
+—------------------
+
+
+Jenkins link:
+https://home.cbp9.tssrd.dc01.its.hpecorp.net/colodeploy/view/Virtualagent/job/virtualagent-deploy/build?delay=0sec 
+
+
+—---------------------
+
+Rally Link (We manage tasks/stories here): https://rally1.rallydev.com/#/628400689311d/teamboard
+
+Salesforce link: https://hp--test.sandbox.my.salesforce.com
+CEP portal: https://itg-test-ext.support.hpe.com/connect/s/?tab=cases
+
+Catis Link (Fill timesheet): https://rmapps.its.hpecorp.net/Catis2Web/MainWide.aspx
+
+
+—-------------
+
+VM setup document: https://rndwiki-pro.its.hpecorp.net/display/sa20/SUSE+VM+Setup+Updated
+
+—--------------
+
+For SFDC access you need to create a blast ticket here. 
+https://hp.my.salesforce-sites.com/BlastWebtoCase/BlastSupportWebToCasePage
+
+Template for SF sheet : Services SF User Template R40.1.xlsx 
+To get the access as a Live agent available for a chat on ITG – take approval from HPE manager Nat and lee
+
+There are two  permission sets that are needed  to be assigned . AA&S and Nat's approval is required for the MIAW access.
+POC: 
+Loh, May Jee (Justine, AA&S) Lucchese, Natalino (Support Services Delivery - Business Operations), Kurdikar, Gurucharan (Workflow Support - AA&S) 
+
+
+ —----------------
+Recording links:
+https://drive.google.com/file/d/1sFVmeHV6tFk3DY4q6qPqhAY3zIzJ3CQq/view   - Intro
+https://drive.google.com/file/d/12Vf-HUHgHBAxsV9sxDsNzr6zr0u1kNDB/view   - Code walkthrough
+https://drive.google.com/file/d/15ovTg_VxhvBmABmp7TrABDQawimzzXI-/view   - Technical KT 
+
+KT Session By MadhuriJ  - 2026/01/22 10:56 GMT+05:30 - Recording
+
+
+
+https://drive.google.com/file/d/1l6OdYy5GbCkdve4G1Wm1etsC1Me0sxWh/view
+https://drive.google.com/file/d/1V6jtc-U2B-XzZ5gKLSsYW8ZVe3IY8tHh/view
+https://drive.google.com/file/d/1KsE7pdaw5In7EuGa8PWZ1zQGshNVGQNL/view?usp=drive_link
+MIAW 
+AWS 
+
+—----------------
+
+WiKi
+https://rndwiki-pro.its.hpecorp.net/pages/viewpage.action?pageId=186881646
+https://rndwiki-pro.its.hpecorp.net/display/sa20/Chat+component+diagrams
+https://rndwiki-pro.its.hpecorp.net/display/sa20/VA+-+New+Architecture+post+migration
+https://rndwiki-pro.its.hpecorp.net/display/sa20/Support+-+Parts+Order 
+https://rndwiki-pro.its.hpecorp.net/display/sa20/VA+Support+Guide
+ 
+
+—--------------
+
+PSE CHAT CORE steps
+1) Go to deploy folder and run ./local_setup.sh    - install Java and mvn
+2) If any error then follow next steps.
+3) cd /tmp && mkdir chat && echo cmVkaXMlM0EwUFFLaUtyVmd3T0tWeTM= > /tmp/chat/redis_password
+4) echo a0e7cfc6-6f64-e92f-4dfd-7cba56adb633> /tmp/secretid.password
+5) Setup Java 11 and Maven 3.6.8 in the system
+6) Copy cacerts to /appdata/
+7) cp settings.local.xml  /home/ubuntu/.m2/settings.xml
+8) ./local_start.sh
+9) mvn clean install -Dmaven.test.skip=true
+10) mvn spring-boot:run                           chat APi madhe
+11) Now also setup redis in local
+12) Copy redis in home
+13) Now go to redis at home and run the commands  8046
+14) docker build . -t va-redis
+15) docker compose -f docker-compose.yaml up --build -d
+docker compose -f docker-compose.local.yml up --build -d   - up/down zookeeper 
+
+
+—-------------------
+
+Copilot liecense req 
+https://hpe.service-now.com/esc?id=sc_cat_item&sys_id=bf83c5f51b085e9049b1b95fdc4bcbab 
+
+
+Access to Salesforce for CEP-Org
+Please send an email to your HPE manager and Siddhartha (siddhartha.avinash@hpe.com) requesting access.
+At the same time, reach out to Siddhartha on Teams with a message such as:
+ “Could you please help me get access to https://hpe-cep.my.salesforce.com?”
+Once you receive approval from your manager, share the approval with Siddhartha on Teams.
